@@ -2,7 +2,7 @@
 
 # Go Style Best Practices
 
-https://google.github.io/styleguide/go/best-practices
+https://jpg-store.github.io/styleguide/go/best-practices
 
 [Overview](index) | [Guide](guide) | [Decisions](decisions) |
 [Best practices](best-practices)
@@ -46,64 +46,64 @@ When choosing the name for a function or method, consider the context in which
 the name will be read. Consider the following recommendations to avoid excess
 [repetition](decisions#repetition) at the call site:
 
-*   The following can generally be omitted from function and method names:
+- The following can generally be omitted from function and method names:
 
-    *   The types of the inputs and outputs (when there is no collision)
-    *   The type of a method's receiver
-    *   Whether an input or output is a pointer
+  - The types of the inputs and outputs (when there is no collision)
+  - The type of a method's receiver
+  - Whether an input or output is a pointer
 
-*   For functions, do not
-    [repeat the name of the package](decisions#repetitive-with-package).
+- For functions, do not
+  [repeat the name of the package](decisions#repetitive-with-package).
 
-    ```go
-    // Bad:
-    package yamlconfig
+  ```go
+  // Bad:
+  package yamlconfig
 
-    func ParseYAMLConfig(input string) (*Config, error)
-    ```
+  func ParseYAMLConfig(input string) (*Config, error)
+  ```
 
-    ```go
-    // Good:
-    package yamlconfig
+  ```go
+  // Good:
+  package yamlconfig
 
-    func Parse(input string) (*Config, error)
-    ```
+  func Parse(input string) (*Config, error)
+  ```
 
-*   For methods, do not repeat the name of the method receiver.
+- For methods, do not repeat the name of the method receiver.
 
-    ```go
-    // Bad:
-    func (c *Config) WriteConfigTo(w io.Writer) (int64, error)
-    ```
+  ```go
+  // Bad:
+  func (c *Config) WriteConfigTo(w io.Writer) (int64, error)
+  ```
 
-    ```go
-    // Good:
-    func (c *Config) WriteTo(w io.Writer) (int64, error)
-    ```
+  ```go
+  // Good:
+  func (c *Config) WriteTo(w io.Writer) (int64, error)
+  ```
 
-*   Do not repeat the names of variables passed as parameters.
+- Do not repeat the names of variables passed as parameters.
 
-    ```go
-    // Bad:
-    func OverrideFirstWithSecond(dest, source *Config) error
-    ```
+  ```go
+  // Bad:
+  func OverrideFirstWithSecond(dest, source *Config) error
+  ```
 
-    ```go
-    // Good:
-    func Override(dest, source *Config) error
-    ```
+  ```go
+  // Good:
+  func Override(dest, source *Config) error
+  ```
 
-*   Do not repeat the names and types of the return values.
+- Do not repeat the names and types of the return values.
 
-    ```go
-    // Bad:
-    func TransformYAMLToJSON(input *Config) *jsonconfig.Config
-    ```
+  ```go
+  // Bad:
+  func TransformYAMLToJSON(input *Config) *jsonconfig.Config
+  ```
 
-    ```go
-    // Good:
-    func Transform(input *Config) *jsonconfig.Config
-    ```
+  ```go
+  // Good:
+  func Transform(input *Config) *jsonconfig.Config
+  ```
 
 When it is necessary to disambiguate functions of a similar name, it is
 acceptable to include extra information.
@@ -121,47 +121,47 @@ func (c *Config) WriteBinaryTo(w io.Writer) (int64, error)
 There are some other common conventions when choosing names for functions and
 methods:
 
-*   Functions that return something are given noun-like names.
+- Functions that return something are given noun-like names.
 
-    ```go
-    // Good:
-    func (c *Config) JobName(key string) (value string, ok bool)
-    ```
+  ```go
+  // Good:
+  func (c *Config) JobName(key string) (value string, ok bool)
+  ```
 
-    A corollary of this is that function and method names should
-    [avoid the prefix `Get`](decisions#getters).
+  A corollary of this is that function and method names should
+  [avoid the prefix `Get`](decisions#getters).
 
-    ```go
-    // Bad:
-    func (c *Config) GetJobName(key string) (value string, ok bool)
-    ```
+  ```go
+  // Bad:
+  func (c *Config) GetJobName(key string) (value string, ok bool)
+  ```
 
-*   Functions that do something are given verb-like names.
+- Functions that do something are given verb-like names.
 
-    ```go
-    // Good:
-    func (c *Config) WriteDetail(w io.Writer) (int64, error)
-    ```
+  ```go
+  // Good:
+  func (c *Config) WriteDetail(w io.Writer) (int64, error)
+  ```
 
-*   Identical functions that differ only by the types involved include the name
-    of the type at the end of the name.
+- Identical functions that differ only by the types involved include the name
+  of the type at the end of the name.
 
-    ```go
-    // Good:
-    func ParseInt(input string) (int, error)
-    func ParseInt64(input string) (int64, error)
-    func AppendInt(buf []byte, value int) []byte
-    func AppendInt64(buf []byte, value int64) []byte
-    ```
+  ```go
+  // Good:
+  func ParseInt(input string) (int, error)
+  func ParseInt64(input string) (int64, error)
+  func AppendInt(buf []byte, value int) []byte
+  func AppendInt64(buf []byte, value int64) []byte
+  ```
 
-    If there is a clear "primary" version, the type can be omitted from the name
-    for that version:
+  If there is a clear "primary" version, the type can be omitted from the name
+  for that version:
 
-    ```go
-    // Good:
-    func (c *Config) Marshal() ([]byte, error)
-    func (c *Config) MarshalText() (string, error)
-    ```
+  ```go
+  // Good:
+  func (c *Config) Marshal() ([]byte, error)
+  func (c *Config) MarshalText() (string, error)
+  ```
 
 <a id="naming-doubles"></a>
 
@@ -274,7 +274,7 @@ other engineers.
 
 See also:
 
-*   [Go Tip #42: Authoring a Stub for Testing](https://google.github.io/styleguide/go/index.html#gotip)
+- [Go Tip #42: Authoring a Stub for Testing](https://jpg-store.github.io/styleguide/go/index.html#gotip)
 
 <a id="naming-doubles-multiple-behaviors"></a>
 
@@ -437,7 +437,7 @@ func TestProcessor(t *testing.T) {
 
 ### Shadowing
 
-**Note:** This explanation uses two informal terms, *stomping* and *shadowing*.
+**Note:** This explanation uses two informal terms, _stomping_ and _shadowing_.
 They are not official concepts in the Go language spec.
 
 Like many programming languages, Go has mutable variables: assigning to a
@@ -454,7 +454,7 @@ func abs(i int) int {
 ```
 
 When using [short variable declarations] with the `:=` operator, in some cases a
-new variable is not created. We can call this *stomping*. It's OK to do this
+new variable is not created. We can call this _stomping_. It's OK to do this
 when the original value is no longer needed.
 
 ```go
@@ -477,7 +477,7 @@ func (s *Server) innerHandler(ctx context.Context, req *pb.MyRequest) *pb.MyResp
 ```
 
 Be careful using short variable declarations in a new scope, though: that
-introduces a new variable. We can call this *shadowing* the original variable.
+introduces a new variable. We can call this _shadowing_ the original variable.
 Code after the end of the block refers to the original. Here is a buggy attempt
 to shorten the deadline conditionally:
 
@@ -548,7 +548,7 @@ the import path. The package name matters more for readability than the path.
 Go package names should be
 [related to what the package provides](decisions#package-names). Naming a
 package just `util`, `helper`, `common` or similar is usually a poor choice (it
-can be used as *part* of the name though). Uninformative names make the code
+can be used as _part_ of the name though). Uninformative names make the code
 harder to read, and if used too broadly they are liable to cause needless
 [import conflicts](decisions#import-renaming).
 
@@ -590,12 +590,12 @@ Here are some other considerations and notes.
 
 Users see [godoc] for the package in one page, and any methods exported by types
 supplied by the package are grouped by their type. Godoc also group constructors
-along with the types they return. If *client code* is likely to need two values
+along with the types they return. If _client code_ is likely to need two values
 of different type to interact with each other, it may be convenient for the user
 to have them in the same package.
 
 Code within a package can access unexported identifiers in the package. If you
-have a few related types whose *implementation* is tightly coupled, placing them
+have a few related types whose _implementation_ is tightly coupled, placing them
 in the same package lets you achieve this coupling without polluting the public
 API with these details.
 
@@ -626,7 +626,7 @@ its own directory is if you expect to open source your project in the future.
 
 See also:
 
-*   [Test double packages](#naming-doubles)
+- [Test double packages](#naming-doubles)
 
 [blog-pkg-names]: https://go.dev/blog/package-names
 [package `bytes`]: https://go.dev/src/bytes/
@@ -644,8 +644,8 @@ Proto library imports are treated differently than standard Go imports due to
 their cross-language nature. The convention for renamed proto imports are based
 on the rule that generated the package:
 
-*   The `pb` suffix is generally used for `go_proto_library` rules.
-*   The `grpc` suffix is generally used for `go_grpc_library` rules.
+- The `pb` suffix is generally used for `go_proto_library` rules.
+- The `grpc` suffix is generally used for `go_grpc_library` rules.
 
 Generally, a short one- or two-letter prefix is used:
 
@@ -714,9 +714,9 @@ imports.
 In Go, [errors are values]; they are created by code and consumed by code.
 Errors can be:
 
-*   Converted into diagnostic information for display to humans
-*   Used by the maintainer
-*   Interpreted by an end user
+- Converted into diagnostic information for display to humans
+- Used by the maintainer
+- Interpreted by an end user
 
 Error messages also show up across a variety of different surfaces including log
 messages, error dumps, and rendered UIs.
@@ -728,11 +728,11 @@ positioned to handle the error most effectively. This is a large topic and it is
 hard to give categorical advice. Use your judgment, but keep the following
 considerations in mind:
 
-*   When creating an error value, decide whether to give it any
-    [structure](#error-structure).
-*   When handling an error, consider [adding information](#error-extra-info)
-    that you have but that the caller and/or callee might not.
-*   See also guidance on [error logging](#error-logging).
+- When creating an error value, decide whether to give it any
+  [structure](#error-structure).
+- When handling an error, consider [adding information](#error-extra-info)
+  that you have but that the caller and/or callee might not.
+- See also guidance on [error logging](#error-logging).
 
 While it is usually not appropriate to ignore an error, a reasonable exception
 to this is when orchestrating related operations, where often only the first
@@ -744,13 +744,13 @@ group of operations that can all fail or be canceled as a group.
 
 See also:
 
-*   [Effective Go on errors](https://go.dev/doc/effective_go#errors)
-*   [A post by the Go Blog on errors](https://go.dev/blog/go1.13-errors)
-*   [Package `errors`](https://pkg.go.dev/errors)
-*   [Package `upspin.io/errors`](https://commandcenter.blogspot.com/2017/12/error-handling-in-upspin.html)
-*   [GoTip #89: When to Use Canonical Status Codes as Errors](https://google.github.io/styleguide/go/index.html#gotip)
-*   [GoTip #48: Error Sentinel Values](https://google.github.io/styleguide/go/index.html#gotip)
-*   [GoTip #13: Designing Errors for Checking](https://google.github.io/styleguide/go/index.html#gotip)
+- [Effective Go on errors](https://go.dev/doc/effective_go#errors)
+- [A post by the Go Blog on errors](https://go.dev/blog/go1.13-errors)
+- [Package `errors`](https://pkg.go.dev/errors)
+- [Package `upspin.io/errors`](https://commandcenter.blogspot.com/2017/12/error-handling-in-upspin.html)
+- [GoTip #89: When to Use Canonical Status Codes as Errors](https://jpg-store.github.io/styleguide/go/index.html#gotip)
+- [GoTip #48: Error Sentinel Values](https://jpg-store.github.io/styleguide/go/index.html#gotip)
+- [GoTip #13: Designing Errors for Checking](https://jpg-store.github.io/styleguide/go/index.html#gotip)
 
 <a id="error-structure"></a>
 
@@ -823,7 +823,7 @@ func handlePet(...) {
 ```
 
 Do not attempt to distinguish errors based on their string form. (See
-[Go Tip #13: Designing Errors for Checking](https://google.github.io/styleguide/go/index.html#gotip)
+[Go Tip #13: Designing Errors for Checking](https://jpg-store.github.io/styleguide/go/index.html#gotip)
 for more.)
 
 ```go
@@ -844,7 +844,7 @@ Other error structures can be used as appropriate, for example a project struct
 containing an error code and detail string. [Package `status`][status] is a
 common encapsulation; if you choose this approach (which you are not obligated
 to do), use [canonical codes]. See
-[Go Tip #89: When to Use Canonical Status Codes as Errors](https://google.github.io/styleguide/go/index.html#gotip)
+[Go Tip #89: When to Use Canonical Status Codes as Errors](https://jpg-store.github.io/styleguide/go/index.html#gotip)
 to know if using status codes is the right choice.
 
 [`os.PathError`]: https://pkg.go.dev/os#PathError
@@ -881,7 +881,7 @@ if err := os.Open("settings.txt"); err != nil {
 // open settings.txt: no such file or directory
 ```
 
-If there is something interesting to say about the *meaning* of the error, of
+If there is something interesting to say about the _meaning_ of the error, of
 course it can be added. Just consider which level of the callchain is best
 positioned to understand this meaning.
 
@@ -930,7 +930,7 @@ caller to call `errors.Unwrap`, `errors.Is` and so on, don't bother with `%w`.
 The same concept applies to [structured errors](#error-structure) like
 [`*status.Status`][status] (see [canonical codes]). For example, if your server
 sends malformed requests to a backend and receives an `InvalidArgument` code,
-this code should *not* be propagated to the client, assuming that the client has
+this code should _not_ be propagated to the client, assuming that the client has
 done nothing wrong. Instead, return an `Internal` canonical code to the client.
 
 However, annotating errors helps automated logging systems preserve the status
@@ -986,7 +986,7 @@ Prefer to place `%w` at the end of an error string.
 
 Errors can be wrapped with
 [the `%w` verb](https://blog.golang.org/go1.13-errors), or by placing them in a
-[structured error](https://google.github.io/styleguide/go/index.html#gotip) that
+[structured error](https://jpg-store.github.io/styleguide/go/index.html#gotip) that
 implements `Unwrap() error` (ex:
 [`fs.PathError`](https://pkg.go.dev/io/fs#PathError)).
 
@@ -1055,34 +1055,34 @@ Functions sometimes need to tell an external system about an error without
 propagating it to their callers. Logging is an obvious choice here; but be
 conscious of what and how you log errors.
 
-*   Like [good test failure messages], log messages should clearly express what
-    went wrong and help the maintainer by including relevant information to
-    diagnose the problem.
+- Like [good test failure messages], log messages should clearly express what
+  went wrong and help the maintainer by including relevant information to
+  diagnose the problem.
 
-*   Avoid duplication. If you return an error, it's usually better not to log it
-    yourself but rather let the caller handle it. The caller can choose to log
-    the error, or perhaps rate-limit logging using [`rate.Sometimes`]. Other
-    options include attempting recovery or even [stopping the program]. In any
-    case, giving the caller control helps avoid logspam.
+- Avoid duplication. If you return an error, it's usually better not to log it
+  yourself but rather let the caller handle it. The caller can choose to log
+  the error, or perhaps rate-limit logging using [`rate.Sometimes`]. Other
+  options include attempting recovery or even [stopping the program]. In any
+  case, giving the caller control helps avoid logspam.
 
-    The downside to this approach, however, is that any logging is written using
-    the caller's line coordinates.
+  The downside to this approach, however, is that any logging is written using
+  the caller's line coordinates.
 
-*   Be careful with [PII]. Many log sinks are not appropriate destinations for
-    sensitive end-user information.
+- Be careful with [PII]. Many log sinks are not appropriate destinations for
+  sensitive end-user information.
 
-*   Use `log.Error` sparingly. ERROR level logging causes a flush and is more
-    expensive than lower logging levels. This can have serious performance
-    impact on your code. When deciding between error and warning levels,
-    consider the best practice that messages at the error level should be
-    actionable rather than "more serious" than a warning.
+- Use `log.Error` sparingly. ERROR level logging causes a flush and is more
+  expensive than lower logging levels. This can have serious performance
+  impact on your code. When deciding between error and warning levels,
+  consider the best practice that messages at the error level should be
+  actionable rather than "more serious" than a warning.
 
-*   Inside Google, we have monitoring systems that can be set up for more
-    effective alerting than writing to a log file and hoping someone notices it.
-    This is similar but not identical to the standard library
-    [package `expvar`].
+- Inside Google, we have monitoring systems that can be set up for more
+  effective alerting than writing to a log file and hoping someone notices it.
+  This is similar but not identical to the standard library
+  [package `expvar`].
 
-[good test failure messages]: https://google.github.io/styleguide/go/decisions#useful-test-failures
+[good test failure messages]: https://jpg-store.github.io/styleguide/go/decisions#useful-test-failures
 [stopping the program]: #checks-and-panics
 [`rate.Sometimes`]: https://pkg.go.dev/golang.org/x/time/rate#Sometimes
 [PII]: https://en.wikipedia.org/wiki/Personal_data
@@ -1096,9 +1096,9 @@ Use verbose logging ([`log.V`]) to your advantage. Verbose logging can be useful
 for development and tracing. Establishing a convention around verbosity levels
 can be helpful. For example:
 
-*   Write a small amount of extra information at `V(1)`
-*   Trace more information in `V(2)`
-*   Dump large internal states in `V(3)`
+- Write a small amount of extra information at `V(1)`
+- Trace more information in `V(2)`
+- Dump large internal states in `V(3)`
 
 To minimize the cost of verbose logging, you should ensure not to accidentally
 call expensive functions even when `log.V` is turned off. `log.V` offers two
@@ -1165,7 +1165,7 @@ this was a historical mistake. If you sample server logs from application
 servers in other languages, it is common to find large stacktraces that are left
 unhandled. Avoid this pitfall in your servers.
 
-[decision against panics]: https://google.github.io/styleguide/go/decisions#dont-panic
+[decision against panics]: https://jpg-store.github.io/styleguide/go/decisions#dont-panic
 [`net/http` server]: https://pkg.go.dev/net/http#Server
 
 <a id="when-to-panic"></a>
@@ -1239,9 +1239,9 @@ explaining how to use your code.
 
 Not every parameter must be enumerated in the documentation. This applies to:
 
-*   function and method parameters
-*   struct fields
-*   APIs for options
+- function and method parameters
+- struct fields
+- APIs for options
 
 Document the error-prone or non-obvious fields and parameters by saying why they
 are interesting.
@@ -1282,12 +1282,12 @@ mind when you first come to write your docs.
 
 See also:
 
-*   [GoTip #41: Identify Function Call Parameters]
-*   [GoTip #51: Patterns for Configuration]
+- [GoTip #41: Identify Function Call Parameters]
+- [GoTip #51: Patterns for Configuration]
 
 [commentary]: decisions#commentary
-[GoTip #41: Identify Function Call Parameters]: https://google.github.io/styleguide/go/index.html#gotip
-[GoTip #51: Patterns for Configuration]: https://google.github.io/styleguide/go/index.html#gotip
+[GoTip #41: Identify Function Call Parameters]: https://jpg-store.github.io/styleguide/go/index.html#gotip
+[GoTip #51: Patterns for Configuration]: https://jpg-store.github.io/styleguide/go/index.html#gotip
 
 <a id="documentation-conventions-contexts"></a>
 
@@ -1319,51 +1319,51 @@ func (Worker) Run(ctx context.Context) error
 Where context behavior is different or non-obvious, it should be expressly
 documented:
 
-*   If the function returns an error other than `ctx.Err()` when the context is
-    cancelled:
+- If the function returns an error other than `ctx.Err()` when the context is
+  cancelled:
 
-    ```go
-    // Good:
-    // Run executes the worker's run loop.
-    //
-    // If the context is cancelled, Run returns a nil error.
-    func (Worker) Run(ctx context.Context) error
-    ```
+  ```go
+  // Good:
+  // Run executes the worker's run loop.
+  //
+  // If the context is cancelled, Run returns a nil error.
+  func (Worker) Run(ctx context.Context) error
+  ```
 
-*   If the function has other mechanisms that may interrupt it or affect
-    lifetime:
+- If the function has other mechanisms that may interrupt it or affect
+  lifetime:
 
-    ```go
-    // Good:
-    // Run executes the worker's run loop.
-    //
-    // Run processes work until the context is cancelled or Stop is called.
-    // Context cancellation is handled asynchronously internally: run may return
-    // before all work has stopped. The Stop method is synchronous and waits
-    // until all operations from the run loop finish. Use Stop for graceful
-    // shutdown.
-    func (Worker) Run(ctx context.Context) error
+  ```go
+  // Good:
+  // Run executes the worker's run loop.
+  //
+  // Run processes work until the context is cancelled or Stop is called.
+  // Context cancellation is handled asynchronously internally: run may return
+  // before all work has stopped. The Stop method is synchronous and waits
+  // until all operations from the run loop finish. Use Stop for graceful
+  // shutdown.
+  func (Worker) Run(ctx context.Context) error
 
-    func (Worker) Stop()
-    ```
+  func (Worker) Stop()
+  ```
 
-*   If the function has special expectations about context lifetime, lineage, or
-    attached values:
+- If the function has special expectations about context lifetime, lineage, or
+  attached values:
 
-    ```go
-    // Good:
-    // NewReceiver starts receiving messages sent to the specified queue.
-    // The context should not have a deadline.
-    func NewReceiver(ctx context.Context) *Receiver
+  ```go
+  // Good:
+  // NewReceiver starts receiving messages sent to the specified queue.
+  // The context should not have a deadline.
+  func NewReceiver(ctx context.Context) *Receiver
 
-    // Principal returns a human-readable name of the party who made the call.
-    // The context must have a value attached to it from security.NewContext.
-    func Principal(ctx context.Context) (name string, ok bool)
-    ```
+  // Principal returns a human-readable name of the party who made the call.
+  // The context must have a value attached to it from security.NewContext.
+  func Principal(ctx context.Context) (name string, ok bool)
+  ```
 
-    **Warning:** Avoid designing APIs that make such demands (like contexts not
-    having deadlines) from their callers. The above is only an example of how to
-    document this if it cannot be avoided, not an endorsement of the pattern.
+  **Warning:** Avoid designing APIs that make such demands (like contexts not
+  having deadlines) from their callers. The above is only an example of how to
+  document this if it cannot be avoided, not an endorsement of the pattern.
 
 <a id="documentation-conventions-concurrency"></a>
 
@@ -1396,60 +1396,60 @@ func (*Buffer) Grow(n int)
 
 Documentation is strongly encouraged if:
 
-*   it is unclear whether the operation is read-only or a mutating
+- it is unclear whether the operation is read-only or a mutating
 
-    ```go
-    // Good:
-    package lrucache
+  ```go
+  // Good:
+  package lrucache
 
-    // Lookup returns the data associated with the key from the cache.
-    //
-    // This operation is not safe for concurrent use.
-    func (*Cache) Lookup(key string) (data []byte, ok bool)
-    ```
+  // Lookup returns the data associated with the key from the cache.
+  //
+  // This operation is not safe for concurrent use.
+  func (*Cache) Lookup(key string) (data []byte, ok bool)
+  ```
 
-    Why? A cache hit when looking up the key mutate a LRU cache internally. How
-    this is implemented may not be obvious to all readers.
+  Why? A cache hit when looking up the key mutate a LRU cache internally. How
+  this is implemented may not be obvious to all readers.
 
-*   synchronization is provided by API
+- synchronization is provided by API
 
-    ```go
-    // Good:
-    package fortune_go_proto
+  ```go
+  // Good:
+  package fortune_go_proto
 
-    // NewFortuneTellerClient returns an *rpc.Client for the FortuneTeller service.
-    // It is safe for simultaneous use by multiple goroutines.
-    func NewFortuneTellerClient(cc *rpc.ClientConn) *FortuneTellerClient
-    ```
+  // NewFortuneTellerClient returns an *rpc.Client for the FortuneTeller service.
+  // It is safe for simultaneous use by multiple goroutines.
+  func NewFortuneTellerClient(cc *rpc.ClientConn) *FortuneTellerClient
+  ```
 
-    Why? Stubby provides synchronization.
+  Why? Stubby provides synchronization.
 
-    **Note:** If the API is a type and the API provides synchronization in
-    entirety, conventionally only the type definition documents the semantics.
+  **Note:** If the API is a type and the API provides synchronization in
+  entirety, conventionally only the type definition documents the semantics.
 
-*   the API consumes user-implemented types of interfaces, and the interface's
-    consumer has particular concurrency requirements:
+- the API consumes user-implemented types of interfaces, and the interface's
+  consumer has particular concurrency requirements:
 
-    ```go
-    // Good:
-    package health
+  ```go
+  // Good:
+  package health
 
-    // A Watcher reports the health of some entity (usually a backend service).
-    //
-    // Watcher methods are safe for simultaneous use by multiple goroutines.
-    type Watcher interface {
-        // Watch sends true on the passed-in channel when the Watcher's
-        // status has changed.
-        Watch(changed chan<- bool) (unwatch func())
+  // A Watcher reports the health of some entity (usually a backend service).
+  //
+  // Watcher methods are safe for simultaneous use by multiple goroutines.
+  type Watcher interface {
+      // Watch sends true on the passed-in channel when the Watcher's
+      // status has changed.
+      Watch(changed chan<- bool) (unwatch func())
 
-        // Health returns nil if the entity being watched is healthy, or a
-        // non-nil error explaining why the entity is not healthy.
-        Health() error
-    }
-    ```
+      // Health returns nil if the entity being watched is healthy, or a
+      // non-nil error explaining why the entity is not healthy.
+      Health() error
+  }
+  ```
 
-    Why? Whether an API is safe for use by multiple goroutines is part of its
-    contract.
+  Why? Whether an API is safe for use by multiple goroutines is part of its
+  contract.
 
 <a id="documentation-conventions-cleanup"></a>
 
@@ -1507,74 +1507,74 @@ during the code review process. This helps to validate that the
 
 [Godoc] provides some specific syntax to [format documentation].
 
-*   A blank line is required to separate paragraphs:
+- A blank line is required to separate paragraphs:
 
-    ```go
-    // Good:
-    // LoadConfig reads a configuration out of the named file.
-    //
-    // See some/shortlink for config file format details.
-    ```
+  ```go
+  // Good:
+  // LoadConfig reads a configuration out of the named file.
+  //
+  // See some/shortlink for config file format details.
+  ```
 
-*   Test files can contain [runnable examples] that appear attached to the
-    corresponding documentation in godoc:
+- Test files can contain [runnable examples] that appear attached to the
+  corresponding documentation in godoc:
 
-    ```go
-    // Good:
-    func ExampleConfig_WriteTo() {
-      cfg := &Config{
-        Name: "example",
-      }
-      if err := cfg.WriteTo(os.Stdout); err != nil {
-        log.Exitf("Failed to write config: %s", err)
-      }
-      // Output:
-      // {
-      //   "name": "example"
-      // }
+  ```go
+  // Good:
+  func ExampleConfig_WriteTo() {
+    cfg := &Config{
+      Name: "example",
     }
-    ```
+    if err := cfg.WriteTo(os.Stdout); err != nil {
+      log.Exitf("Failed to write config: %s", err)
+    }
+    // Output:
+    // {
+    //   "name": "example"
+    // }
+  }
+  ```
 
-*   Indenting lines by an additional two spaces formats them verbatim:
+- Indenting lines by an additional two spaces formats them verbatim:
 
-    ```go
-    // Good:
-    // Update runs the function in an atomic transaction.
-    //
-    // This is typically used with an anonymous TransactionFunc:
-    //
-    //   if err := db.Update(func(state *State) { state.Foo = bar }); err != nil {
-    //     //...
-    //   }
-    ```
+  ```go
+  // Good:
+  // Update runs the function in an atomic transaction.
+  //
+  // This is typically used with an anonymous TransactionFunc:
+  //
+  //   if err := db.Update(func(state *State) { state.Foo = bar }); err != nil {
+  //     //...
+  //   }
+  ```
 
-    Note, however, that it can often be more appropriate to put code in a
-    runnable example instead of including it in a comment.
+  Note, however, that it can often be more appropriate to put code in a
+  runnable example instead of including it in a comment.
 
-    This verbatim formatting can be leveraged for formatting that is not native
-    to godoc, such as lists and tables:
+  This verbatim formatting can be leveraged for formatting that is not native
+  to godoc, such as lists and tables:
 
-    ```go
-    // Good:
-    // LoadConfig reads a configuration out of the named file.
-    //
-    // LoadConfig treats the following keys in special ways:
-    //   "import" will make this configuration inherit from the named file.
-    //   "env" if present will be populated with the system environment.
-    ```
+  ```go
+  // Good:
+  // LoadConfig reads a configuration out of the named file.
+  //
+  // LoadConfig treats the following keys in special ways:
+  //   "import" will make this configuration inherit from the named file.
+  //   "env" if present will be populated with the system environment.
+  ```
 
-*   A single line that begins with a capital letter, contains no punctuation
-    except parentheses and commas, and is followed by another paragraph, is
-    formatted as a header:
+- A single line that begins with a capital letter, contains no punctuation
+  except parentheses and commas, and is followed by another paragraph, is
+  formatted as a header:
 
-    ```go
-    // Good:
-    // The following line is formatted as a heading.
-    //
-    // Using headings
-    //
-    // Headings come with autogenerated anchor tags for easy linking.
-    ```
+  ```go
+  // Good:
+  // The following line is formatted as a heading.
+  //
+  // Using headings
+  //
+  // Headings come with autogenerated anchor tags for easy linking.
+  ```
 
 [Godoc]: https://pkg.go.dev/
 [format documentation]: https://go.dev/doc/comment
@@ -1800,7 +1800,7 @@ fleet or even harm performance. When in doubt, see
 [zero initialization](#vardeclzero) or a
 [composite literal declaration](#vardeclcomposite).
 
-[GoTip #3: Benchmarking Go Code]: https://google.github.io/styleguide/go/index.html#gotip
+[GoTip #3: Benchmarking Go Code]: https://jpg-store.github.io/styleguide/go/index.html#gotip
 
 <a id="decl-chan"></a>
 
@@ -1866,7 +1866,7 @@ your use case. Use your judgment, and balance the principles of [clarity] and
 [least mechanism].
 
 See also:
-[Go Tip #24: Use Case-Specific Constructions](https://google.github.io/styleguide/go/index.html#gotip)
+[Go Tip #24: Use Case-Specific Constructions](https://jpg-store.github.io/styleguide/go/index.html#gotip)
 
 [option struct]: #option-structure
 [variadic options]: #variadic-options
@@ -1884,12 +1884,12 @@ exported function.)
 
 Using an option structure has a number of benefits:
 
-*   The struct literal includes both fields and values for each argument, which
-    makes them self-documenting and harder to swap.
-*   Irrelevant or "default" fields can be omitted.
-*   Callers can share the options struct and write helpers to operate on it.
-*   Structs provide cleaner per-field documentation than function arguments.
-*   Option structs can grow over time without impacting call-sites.
+- The struct literal includes both fields and values for each argument, which
+  makes them self-documenting and harder to swap.
+- Irrelevant or "default" fields can be omitted.
+- Callers can share the options struct and write helpers to operate on it.
+- Structs provide cleaner per-field documentation than function arguments.
+- Option structs can grow over time without impacting call-sites.
 
 Here is an example of a function that could be improved:
 
@@ -1948,9 +1948,9 @@ func foo(ctx context.Context) {
 
 This option is often preferred when some of the following apply:
 
-*   All callers need to specify one or more of the options.
-*   A large number of callers need to provide many options.
-*   The options are shared between multiple functions that the user will call.
+- All callers need to specify one or more of the options.
+- A large number of callers need to provide many options.
+- The options are shared between multiple functions that the user will call.
 
 <a id="variadic-options"></a>
 
@@ -1966,15 +1966,15 @@ type) that will be updated based on the inputs.
 
 Using variadic options can provide a number of benefits:
 
-*   Options take no space at a call-site when no configuration is needed.
-*   Options are still values, so callers can share them, write helpers, and
-    accumulate them.
-*   Options can accept multiple parameters (e.g. `cartesian.Translate(dx, dy
-    int) TransformOption`).
-*   The option functions can return a named type to group options together in
-    godoc.
-*   Packages can allow (or prevent) third-party packages to define (or from
-    defining) their own options.
+- Options take no space at a call-site when no configuration is needed.
+- Options are still values, so callers can share them, write helpers, and
+  accumulate them.
+- Options can accept multiple parameters (e.g. `cartesian.Translate(dx, dy
+int) TransformOption`).
+- The option functions can return a named type to group options together in
+  godoc.
+- Packages can allow (or prevent) third-party packages to define (or from
+  defining) their own options.
 
 **Note:** Using variadic options requires a substantial amount of additional
 code (see the following example), so it should only be used when the advantages
@@ -2073,14 +2073,14 @@ func foo(ctx context.Context) {
 
 Prefer this option when many of the following apply:
 
-*   Most callers will not need to specify any options.
-*   Most options are used infrequently.
-*   There are a large number of options.
-*   Options require arguments.
-*   Options could fail or be set incorrectly (in which case the option function
-    returns an `error`).
-*   Options require a lot of documentation that can be hard to fit in a struct.
-*   Users or other packages can provide custom options.
+- Most callers will not need to specify any options.
+- Most options are used infrequently.
+- There are a large number of options.
+- Options require arguments.
+- Options could fail or be set incorrectly (in which case the option function
+  returns an `error`).
+- Options require a lot of documentation that can be hard to fit in a struct.
+- Users or other packages can provide custom options.
 
 Options in this style should accept parameters rather than using presence to
 signal their value; the latter can make dynamic composition of arguments much
@@ -2122,18 +2122,18 @@ is recommended, since it is the simplest and is easy to use correctly. However,
 if you need different features that it doesn't provide, pick one of the other
 options.
 
-*   **[cobra]**
+- **[cobra]**
 
-    *   Flag convention: getopt
-    *   Common outside the Google codebase.
-    *   Many extra features.
-    *   Pitfalls in usage (see below).
+  - Flag convention: getopt
+  - Common outside the Google codebase.
+  - Many extra features.
+  - Pitfalls in usage (see below).
 
-*   **[subcommands]**
+- **[subcommands]**
 
-    *   Flag convention: Go
-    *   Simple and easy to use correctly.
-    *   Recommended if you don't need extra features.
+  - Flag convention: Go
+  - Simple and easy to use correctly.
+  - Recommended if you don't need extra features.
 
 **Warning**: cobra command functions should use `cmd.Context()` to obtain a
 context rather than creating their own root context with `context.Background`.
@@ -2166,17 +2166,17 @@ language often wonder about. -->
 
 Go distinguishes between "test helpers" and "assertion helpers":
 
-*   **Test helpers** are functions that do setup or cleanup tasks. All failures
-    that occur in test helpers are expected to be failures of the environment
-    (not from the code under test) — for example when a test database cannot be
-    started because there are no more free ports on this machine. For functions
-    like these, calling `t.Helper` is often appropriate to
-    [mark them as a test helper]. See [error handling in test helpers] for more
-    details.
+- **Test helpers** are functions that do setup or cleanup tasks. All failures
+  that occur in test helpers are expected to be failures of the environment
+  (not from the code under test) — for example when a test database cannot be
+  started because there are no more free ports on this machine. For functions
+  like these, calling `t.Helper` is often appropriate to
+  [mark them as a test helper]. See [error handling in test helpers] for more
+  details.
 
-*   **Assertion helpers** are functions that check the correctness of a system
-    and fail the test if an expectation is not met. Assertion helpers are
-    [not considered idiomatic] in Go.
+- **Assertion helpers** are functions that check the correctness of a system
+  and fail the test if an expectation is not met. Assertion helpers are
+  [not considered idiomatic] in Go.
 
 The purpose of a test is to report pass/fail conditions of the code under test.
 The ideal place to fail a test is within the `Test` function itself, as that
@@ -2189,7 +2189,7 @@ ensures that [failure messages] and the test logic are clear.
 
 As your testing code grows, it may become necessary to factor out some
 functionality to separate functions. Standard software engineering
-considerations still apply, as *test code is still code*. If the functionality
+considerations still apply, as _test code is still code_. If the functionality
 does not interact with the testing framework, then all of the usual rules apply.
 When the common code interacts with the framework, however, some care must be
 taken to avoid common pitfalls that can lead to uninformative failure messages
@@ -2199,19 +2199,19 @@ If many separate test cases require the same validation logic, arrange the test
 in one of the following ways instead of using assertion helpers or complex
 validation functions:
 
-*   Inline the logic (both the validation and the failure) in the `Test`
-    function, even if it is repetitive. This works best in simple cases.
-*   If inputs are similar, consider unifying them into a [table-driven test]
-    while keeping the logic inlined in the loop. This helps to avoid repetition
-    while keeping the validation and failure in the `Test`.
-*   If there are multiple callers who need the same validation function but
-    table tests are not suitable (typically because the inputs are not simple
-    enough or the validation is required as part of a sequence of operations),
-    arrange the validation function so that it returns a value (typically an
-    `error`) rather than taking a `testing.T` parameter and using it to fail the
-    test. Use logic within the `Test` to decide whether to fail, and to provide
-    [useful test failures]. You can also create test helpers to factor out
-    common boilerplate setup code.
+- Inline the logic (both the validation and the failure) in the `Test`
+  function, even if it is repetitive. This works best in simple cases.
+- If inputs are similar, consider unifying them into a [table-driven test]
+  while keeping the logic inlined in the loop. This helps to avoid repetition
+  while keeping the validation and failure in the `Test`.
+- If there are multiple callers who need the same validation function but
+  table tests are not suitable (typically because the inputs are not simple
+  enough or the validation is required as part of a sequence of operations),
+  arrange the validation function so that it returns a value (typically an
+  `error`) rather than taking a `testing.T` parameter and using it to fail the
+  test. Use logic within the `Test` to decide whether to fail, and to provide
+  [useful test failures]. You can also create test helpers to factor out
+  common boilerplate setup code.
 
 The design outlined in the last point maintains orthogonality. For example,
 [package `cmp`] is not designed to fail tests, but rather to compare (and to
@@ -2353,49 +2353,49 @@ implementation makes legal moves, not whether the moves are smart.
     The test should note which invariants are broken and how. Your design can
     choose between two disciplines for failure reporting:
 
-    *   **Fail fast**: return an error as soon as the implementation violates an
-        invariant.
+    - **Fail fast**: return an error as soon as the implementation violates an
+      invariant.
 
-        This is the simplest approach, and it works well if the acceptance test
-        is expected to execute quickly. Simple error [sentinels] and
-        [custom types] can be used easily here, which conversely makes testing
-        the acceptance test easy.
+      This is the simplest approach, and it works well if the acceptance test
+      is expected to execute quickly. Simple error [sentinels] and
+      [custom types] can be used easily here, which conversely makes testing
+      the acceptance test easy.
 
-        ```go
-        for color, army := range b.Armies {
-            // The king should never leave the board, because the game ends at
-            // checkmate.
-            if army.King == nil {
-                return &MissingPieceError{Color: color, Piece: chess.King}
-            }
-        }
-        ```
+      ```go
+      for color, army := range b.Armies {
+          // The king should never leave the board, because the game ends at
+          // checkmate.
+          if army.King == nil {
+              return &MissingPieceError{Color: color, Piece: chess.King}
+          }
+      }
+      ```
 
-    *   **Aggregate all failures**: collect all failures, and report them all.
+    - **Aggregate all failures**: collect all failures, and report them all.
 
-        This approach resembles the [keep going](decisions#keep-going) guidance
-        in feel and may be preferable if the acceptance test is expected to
-        execute slowly.
+      This approach resembles the [keep going](decisions#keep-going) guidance
+      in feel and may be preferable if the acceptance test is expected to
+      execute slowly.
 
-        How you aggregate the failures should be dictated by whether you want to
-        give users the ability or yourself the ability to interrogate individual
-        failures (for example, for you to test your acceptance test). Below
-        demonstrates using a [custom error type][custom types] that
-        [aggregates errors]:
+      How you aggregate the failures should be dictated by whether you want to
+      give users the ability or yourself the ability to interrogate individual
+      failures (for example, for you to test your acceptance test). Below
+      demonstrates using a [custom error type][custom types] that
+      [aggregates errors]:
 
-        ```go
-        var badMoves []error
+      ```go
+      var badMoves []error
 
-        move := p.Move()
-        if putsOwnKingIntoCheck(b, move) {
-            badMoves = append(badMoves, PutsSelfIntoCheckError{Move: move})
-        }
+      move := p.Move()
+      if putsOwnKingIntoCheck(b, move) {
+          badMoves = append(badMoves, PutsSelfIntoCheckError{Move: move})
+      }
 
-        if len(badMoves) > 0 {
-            return SimulationError{BadMoves: badMoves}
-        }
-        return nil
-        ```
+      if len(badMoves) > 0 {
+          return SimulationError{BadMoves: badMoves}
+      }
+      return nil
+      ```
 
 The acceptance test should honor the [keep going](decisions#keep-going) guidance
 by not calling `t.Fatal` unless the test detects a broken invariant in the
@@ -2442,9 +2442,9 @@ func TestAcceptance(t *testing.T) {
 }
 ```
 
-[sentinels]: https://google.github.io/styleguide/go/index.html#gotip
-[custom types]: https://google.github.io/styleguide/go/index.html#gotip
-[aggregates errors]: https://google.github.io/styleguide/go/index.html#gotip
+[sentinels]: https://jpg-store.github.io/styleguide/go/index.html#gotip
+[custom types]: https://jpg-store.github.io/styleguide/go/index.html#gotip
+[aggregates errors]: https://jpg-store.github.io/styleguide/go/index.html#gotip
 
 <a id="use-real-transports"></a>
 
@@ -2489,11 +2489,11 @@ test function before the test loop. Failures that affect a single entry in the
 test table, which make it impossible to continue with that entry, should be
 reported as follows:
 
-*   If you're not using `t.Run` subtests, use `t.Error` followed by a `continue`
-    statement to move on to the next table entry.
-*   If you're using subtests (and you're inside a call to `t.Run`), use
-    `t.Fatal`, which ends the current subtest and allows your test case to
-    progress to the next subtest.
+- If you're not using `t.Run` subtests, use `t.Error` followed by a `continue`
+  statement to move on to the next table entry.
+- If you're using subtests (and you're inside a call to `t.Run`), use
+  `t.Fatal`, which ends the current subtest and allows your test case to
+  progress to the next subtest.
 
 **Warning:** It is not always safe to call `t.Fatal` and similar functions.
 [More details here](#t-fatal-goroutine).
@@ -2557,7 +2557,7 @@ fails, the user should know where, and why.
 **Tip:** Go 1.14 introduced a [`t.Cleanup`] function that can be used to
 register cleanup functions that run when your test completes. The function also
 works with test helpers. See
-[GoTip #4: Cleaning Up Your Tests](https://google.github.io/styleguide/go/index.html#gotip)
+[GoTip #4: Cleaning Up Your Tests](https://jpg-store.github.io/styleguide/go/index.html#gotip)
 for guidance on simplifying test helpers.
 
 The snippet below in a fictional file called `paint_test.go` demonstrates how
@@ -2626,9 +2626,9 @@ Whereas `paint_test.go:32` refers to the line of the test that failed in
 Correctly using `(*testing.T).Helper` attributes the location of the failure
 much better when:
 
-*   the helper functions grow
-*   the helper functions call other helpers
-*   the amount of helper usage in the test functions grow
+- the helper functions grow
+- the helper functions call other helpers
+- the amount of helper usage in the test functions grow
 
 **Tip:** If a helper calls `(*testing.T).Error` or `(*testing.T).Fatal`, provide
 some context in the format string to help determine what went wrong and why.
@@ -2895,9 +2895,9 @@ an external database).
 Using a `sync.Once` may be appropriate, though not required, if all of the
 following are true about the common setup:
 
-*   It is expensive.
-*   It only applies to some tests.
-*   It does not require teardown.
+- It is expensive.
+- It only applies to some tests.
+- It does not require teardown.
 
 ```go
 // Good:
@@ -2959,11 +2959,11 @@ respect the context's cancellation.
 
 There are several ways to concatenate strings in Go. Some examples include:
 
-*   The "+" operator
-*   `fmt.Sprintf`
-*   `strings.Builder`
-*   `text/template`
-*   `safehtml/template`
+- The "+" operator
+- `fmt.Sprintf`
+- `strings.Builder`
+- `text/template`
+- `safehtml/template`
 
 Though there is no one-size-fits-all rule for which to choose, the following
 guidance outlines when each method is preferred.
@@ -3025,7 +3025,7 @@ str := b.String()
 ```
 
 **NOTE**: For more discussion, see
-[GoTip #29: Building Strings Efficiently](https://google.github.io/styleguide/go/index.html#gotip).
+[GoTip #29: Building Strings Efficiently](https://jpg-store.github.io/styleguide/go/index.html#gotip).
 
 <a id="string-constants"></a>
 
@@ -3108,12 +3108,12 @@ constructors, functions, methods, or struct fields on the call chain.
 
 See also:
 
-*   [Go Tip #5: Slimming Your Client Libraries](https://google.github.io/styleguide/go/index.html#gotip)
-*   [Go Tip #24: Use Case-Specific Constructions](https://google.github.io/styleguide/go/index.html#gotip)
-*   [Go Tip #40: Improving Time Testability with Function Parameters](https://google.github.io/styleguide/go/index.html#gotip)
-*   [Go Tip #41: Identify Function Call Parameters](https://google.github.io/styleguide/go/index.html#gotip)
-*   [Go Tip #44: Improving Time Testability with Struct Fields](https://google.github.io/styleguide/go/index.html#gotip)
-*   [Go Tip #80: Dependency Injection Principles](https://google.github.io/styleguide/go/index.html#gotip)
+- [Go Tip #5: Slimming Your Client Libraries](https://jpg-store.github.io/styleguide/go/index.html#gotip)
+- [Go Tip #24: Use Case-Specific Constructions](https://jpg-store.github.io/styleguide/go/index.html#gotip)
+- [Go Tip #40: Improving Time Testability with Function Parameters](https://jpg-store.github.io/styleguide/go/index.html#gotip)
+- [Go Tip #41: Identify Function Call Parameters](https://jpg-store.github.io/styleguide/go/index.html#gotip)
+- [Go Tip #44: Improving Time Testability with Struct Fields](https://jpg-store.github.io/styleguide/go/index.html#gotip)
+- [Go Tip #80: Dependency Injection Principles](https://jpg-store.github.io/styleguide/go/index.html#gotip)
 
 APIs that do not support explicit dependency passing become fragile as the
 number of clients increases:
@@ -3178,49 +3178,49 @@ filters, and prevents tests from running in parallel or being sharded.
 Using global state poses problems that lack easy answers for you and the API's
 clients:
 
-*   What happens if a client needs to use different and separately operating
-    sets of `Plugin`s (for example, to support multiple servers) in the same
-    process space?
+- What happens if a client needs to use different and separately operating
+  sets of `Plugin`s (for example, to support multiple servers) in the same
+  process space?
 
-*   What happens if a client wants to replace a registered `Plugin` with an
-    alternative implementation in a test, like a [test double]?
+- What happens if a client wants to replace a registered `Plugin` with an
+  alternative implementation in a test, like a [test double]?
 
-    What happens if a client's tests require hermeticity between instances of a
-    `Plugin`, or between all of the plugins registered?
+  What happens if a client's tests require hermeticity between instances of a
+  `Plugin`, or between all of the plugins registered?
 
-*   What happens if multiple clients `Register` a `Plugin` under the same name?
-    Which one wins, if any?
+- What happens if multiple clients `Register` a `Plugin` under the same name?
+  Which one wins, if any?
 
-    How should errors be [handled](decisions#handle-errors)? If the code panics
-    or calls `log.Fatal`, will that always be
-    [appropriate for all places in which API would be called](decisions#dont-panic)?
-    Can a client verify it doesn't do something bad before doing so?
+  How should errors be [handled](decisions#handle-errors)? If the code panics
+  or calls `log.Fatal`, will that always be
+  [appropriate for all places in which API would be called](decisions#dont-panic)?
+  Can a client verify it doesn't do something bad before doing so?
 
-*   Are there certain stages in a program's startup phases or lifetime during
-    which `Register` can be called and when it can't?
+- Are there certain stages in a program's startup phases or lifetime during
+  which `Register` can be called and when it can't?
 
-    What happens if `Register` is called at the wrong time? A client could call
-    `Register` in [`func init`](https://go.dev/ref/spec#Package_initialization),
-    before flags are parsed, or after `main`. The stage at which a function is
-    called affects error handling. If the author of an API assumes the API is
-    *only* called during program initialization without the requirement that it
-    is, the assumption may nudge the author to design error handling to
-    [abort the program](best-practices#program-init) by modeling the API as a
-    `Must`-like function. Aborting is not appropriate for general-purpose
-    library functions that can be used at any stage.
+  What happens if `Register` is called at the wrong time? A client could call
+  `Register` in [`func init`](https://go.dev/ref/spec#Package_initialization),
+  before flags are parsed, or after `main`. The stage at which a function is
+  called affects error handling. If the author of an API assumes the API is
+  _only_ called during program initialization without the requirement that it
+  is, the assumption may nudge the author to design error handling to
+  [abort the program](best-practices#program-init) by modeling the API as a
+  `Must`-like function. Aborting is not appropriate for general-purpose
+  library functions that can be used at any stage.
 
-*   What if the client's and the designer's concurrency needs are mismatched?
+- What if the client's and the designer's concurrency needs are mismatched?
 
 See also:
 
-*   [Go Tip #36: Enclosing Package-Level State](https://google.github.io/styleguide/go/index.html#gotip)
-*   [Go Tip #71: Reducing Parallel Test Flakiness](https://google.github.io/styleguide/go/index.html#gotip)
-*   [Go Tip #80: Dependency Injection Principles](https://google.github.io/styleguide/go/index.html#gotip)
-*   Error Handling:
-    [Look Before You Leap](https://docs.python.org/3/glossary.html#term-LBYL)
-    versus
-    [Easier to Ask for Forgiveness than Permission](https://docs.python.org/3/glossary.html#term-EAFP)
-*   [Unit Testing Practices on Public APIs]
+- [Go Tip #36: Enclosing Package-Level State](https://jpg-store.github.io/styleguide/go/index.html#gotip)
+- [Go Tip #71: Reducing Parallel Test Flakiness](https://jpg-store.github.io/styleguide/go/index.html#gotip)
+- [Go Tip #80: Dependency Injection Principles](https://jpg-store.github.io/styleguide/go/index.html#gotip)
+- Error Handling:
+  [Look Before You Leap](https://docs.python.org/3/glossary.html#term-LBYL)
+  versus
+  [Easier to Ask for Forgiveness than Permission](https://docs.python.org/3/glossary.html#term-EAFP)
+- [Unit Testing Practices on Public APIs]
 
 Global state has cascading effects on the
 [health of the Google codebase](guide.md#maintainability). Global state should
@@ -3237,56 +3237,56 @@ be approached with **extreme scrutiny**.
 
 Several of the most common problematic API forms are enumerated below:
 
-*   Top-level variables irrespective of whether they are exported.
+- Top-level variables irrespective of whether they are exported.
 
-    ```go
-    // Bad:
-    package logger
+  ```go
+  // Bad:
+  package logger
 
-    // Sinks manages the default output sources for this package's logging API.  This
-    // variable should be set at package initialization time and never thereafter.
-    var Sinks []Sink
-    ```
+  // Sinks manages the default output sources for this package's logging API.  This
+  // variable should be set at package initialization time and never thereafter.
+  var Sinks []Sink
+  ```
 
-    See the [litmus tests](#globals-litmus-tests) to know when these are safe.
+  See the [litmus tests](#globals-litmus-tests) to know when these are safe.
 
-*   The
-    [service locator pattern](https://en.wikipedia.org/wiki/Service_locator_pattern).
-    See the [first example](#globals). The service locator pattern itself is not
-    problematic, rather the locator being defined as global.
+- The
+  [service locator pattern](https://en.wikipedia.org/wiki/Service_locator_pattern).
+  See the [first example](#globals). The service locator pattern itself is not
+  problematic, rather the locator being defined as global.
 
-*   Registries for
-    [callbacks](https://en.wikipedia.org/wiki/Callback_\(computer_programming\))
-    and similar behaviors.
+- Registries for
+  [callbacks](<https://en.wikipedia.org/wiki/Callback_(computer_programming)>)
+  and similar behaviors.
 
-    ```go
-    // Bad:
-    package health
+  ```go
+  // Bad:
+  package health
 
-    var unhealthyFuncs []func
+  var unhealthyFuncs []func
 
-    func OnUnhealthy(f func()) {
-      unhealthyFuncs = append(unhealthyFuncs, f)
-    }
-    ```
+  func OnUnhealthy(f func()) {
+    unhealthyFuncs = append(unhealthyFuncs, f)
+  }
+  ```
 
-*   Thick-Client singletons for things like backends, storage, data access
-    layers, and other system resources. These often pose additional problems
-    with service reliability.
+- Thick-Client singletons for things like backends, storage, data access
+  layers, and other system resources. These often pose additional problems
+  with service reliability.
 
-    ```go
-    // Bad:
-    package useradmin
+  ```go
+  // Bad:
+  package useradmin
 
-    var client pb.UserAdminServiceClientInterface
+  var client pb.UserAdminServiceClientInterface
 
-    func Client() *pb.UserAdminServiceClient {
-        if client == nil {
-            client = ...  // Set up client.
-        }
-        return client
-    }
-    ```
+  func Client() *pb.UserAdminServiceClient {
+      if client == nil {
+          client = ...  // Set up client.
+      }
+      return client
+  }
+  ```
 
 > **Note:** Many legacy APIs in the Google codebase do not follow this guidance;
 > in fact, some Go standard libraries allow for configuration via global values.
@@ -3303,32 +3303,31 @@ Several of the most common problematic API forms are enumerated below:
 
 [APIs using the patterns above](#globals-forms) are unsafe when:
 
-*   Multiple functions interact via global state when executed in the same
-    program, despite being otherwise independent (for example, authored by
-    different authors in vastly different directories).
-*   Independent test cases interact with each other through global state.
-*   Users of the API are tempted to swap or replace global state for testing
-    purposes, particularly to replace any part of the state with a
-    [test double], like a stub, fake, spy, or mock.
-*   Users have to consider special ordering requirements when interacting with
-    global state: `func init`, whether flags are parsed yet, etc.
+- Multiple functions interact via global state when executed in the same
+  program, despite being otherwise independent (for example, authored by
+  different authors in vastly different directories).
+- Independent test cases interact with each other through global state.
+- Users of the API are tempted to swap or replace global state for testing
+  purposes, particularly to replace any part of the state with a
+  [test double], like a stub, fake, spy, or mock.
+- Users have to consider special ordering requirements when interacting with
+  global state: `func init`, whether flags are parsed yet, etc.
 
 Provided the conditions above are avoided, there are a **few limited
 circumstances under which these APIs are safe**, namely when any of the
 following is true:
 
-*   The global state is logically constant
-    ([example](https://github.com/klauspost/compress/blob/290f4cfacb3eff892555a491e3eeb569a48665e7/zstd/snappy.go#L413)).
-*   The package's observable behavior is stateless. For example, a public
-    function may use a private global variable as a cache, but so long as the
-    caller can't distinguish cache hits from misses, the function is stateless.
-*   The global state does not bleed into things that are external to the
-    program, like sidecar processes or files on a shared filesystem.
-*   There is no expectation of predictable behavior
-    ([example](https://pkg.go.dev/math/rand)).
+- The global state is logically constant
+  ([example](https://github.com/klauspost/compress/blob/290f4cfacb3eff892555a491e3eeb569a48665e7/zstd/snappy.go#L413)).
+- The package's observable behavior is stateless. For example, a public
+  function may use a private global variable as a cache, but so long as the
+  caller can't distinguish cache hits from misses, the function is stateless.
+- The global state does not bleed into things that are external to the
+  program, like sidecar processes or files on a shared filesystem.
+- There is no expectation of predictable behavior
+  ([example](https://pkg.go.dev/math/rand)).
 
-> **Note:**
-> [Sidecar processes](https://www.oreilly.com/library/view/designing-distributed-systems/9781491983638/ch02.html)
+> **Note:** > [Sidecar processes](https://www.oreilly.com/library/view/designing-distributed-systems/9781491983638/ch02.html)
 > may **not** strictly be process-local. They can and often are shared with more
 > than one application process. Moreover, these sidecars often interact with
 > external distributed systems.
@@ -3343,18 +3342,18 @@ An example of one of these safe situations is
 Consider the litmus tests from above applied to a typical decoder, like the one
 for handling the [PNG](https://pkg.go.dev/image/png) format:
 
-*   Multiple calls to `package image`'s APIs that use the registered decoders
-    (for example, `image.Decode`) cannot interfere with one another, similarly
-    for tests. The only exception is `image.RegisterFormat`, but that is
-    mitigated by the points below.
-*   It is extremely unlikely that a user would want to replace a decoder with a
-    [test double], as the PNG decoder exemplifies a case in which our codebase's
-    preference for real objects applies. However, a user would be more likely to
-    replace a decoder with a test double if the decoder statefully interacted
-    with operating system resources (for example, the network).
-*   Collisions in registration are conceivable, though they are probably rare in
-    practice.
-*   The decoders are stateless, idempotent, and pure.
+- Multiple calls to `package image`'s APIs that use the registered decoders
+  (for example, `image.Decode`) cannot interfere with one another, similarly
+  for tests. The only exception is `image.RegisterFormat`, but that is
+  mitigated by the points below.
+- It is extremely unlikely that a user would want to replace a decoder with a
+  [test double], as the PNG decoder exemplifies a case in which our codebase's
+  preference for real objects applies. However, a user would be more likely to
+  replace a decoder with a test double if the decoder statefully interacted
+  with operating system resources (for example, the network).
+- Collisions in registration are conceivable, though they are probably rare in
+  practice.
+- The decoders are stateless, idempotent, and pure.
 
 <a id="globals-default-instance"></a>
 
@@ -3405,5 +3404,5 @@ cases:
 
 See also:
 
-*   [Go Tip #36: Enclosing Package-Level State](https://google.github.io/styleguide/go/index.html#gotip)
-*   [Go Tip #80: Dependency Injection Principles](https://google.github.io/styleguide/go/index.html#gotip)
+- [Go Tip #36: Enclosing Package-Level State](https://jpg-store.github.io/styleguide/go/index.html#gotip)
+- [Go Tip #80: Dependency Injection Principles](https://jpg-store.github.io/styleguide/go/index.html#gotip)

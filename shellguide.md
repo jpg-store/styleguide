@@ -18,22 +18,21 @@ Authored, revised and maintained by many Googlers.
 
 ## Table of Contents
 
-Section                                                                              | Contents
------------------------------------------------------------------------------------- | --------
-[Background](#s1-background)                                                         | [Which Shell to Use](#s1.1-which-shell-to-use) - [When to use Shell](#s1.2-when-to-use-shell)
-[Shell Files and Interpreter Invocation](#s2-shell-files-and-interpreter-invocation) | [File Extensions](#s2.1-file-extensions) - [SUID/SGID](#s2.2-suid-sgid)
-[Environment](#s3-environment)                                                       | [STDOUT vs STDERR](#s3.1-stdout-vs-stderr)
-[Comments](#s4-comments)                                                             | [File Header](#s4.1-file-header) - [Function Comments](#s4.2-function-comments) - [Implementation Comments](#s4.3-implementation-comments) - [TODO Comments](#s4.4-todo-comments)
-[Formatting](#s5-formatting)                                                         | [Indentation](#s5.1-indentation) - [Line Length and Long Strings](#s5.2-line-length-and-long-strings) - [Pipelines](#s5.3-pipelines) - [Loops](#s5.4-loops) - [Case statement](#s5.5-case-statement) - [Variable expansion](#s5.6-variable-expansion) - [Quoting](#s5.7-quoting)
-[Features and Bugs](#s6-features-and-bugs)                                           |    [ShellCheck](#s6.1-shellcheck) - [Command Substitution](#s6.2-command-substitution) - [Test, `[… ]`, and `[[… ]]`](#s6.3-tests) - [Testing Strings](#s6.4-testing-strings) - [Wildcard Expansion of Filenames](#s6.5-wildcard-expansion-of-filenames) - [Eval](#s6.6-eval) - [Arrays](#s6.7-arrays) - [Pipes to While](#s6.8-pipes-to-while) - [Arithmetic](#s6.9-arithmetic)
-[Naming Conventions](#s7-naming-conventions)                                         | [Function Names](#s7.1-function-names) - [Variable Names](#s7.2-variable-names) - [Constants and Environment Variable Names](#s7.3-constants-and-environment-variable-names) - [Source Filenames](#s7.4-source-filenames) - [Read-only Variables](#s7.5-read-only-variables) - [Use Local Variables](#s7.6-use-local-variables) - [Function Location](#s7.7-function-location) - [main](#s7.8-main)
-[Calling Commands](#s8-calling-commands)                                             | [Checking Return Values](#s8.1-checking-return-values) - [Builtin Commands vs. External Commands](#s8.2-builtin-commands-vs-external-commands)
-[Conclusion](#s9-conclusion)                                                         |
+| Section                                                                              | Contents                                                                                                                                                                                                                                                                                                                                                                                            |
+| ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Background](#s1-background)                                                         | [Which Shell to Use](#s1.1-which-shell-to-use) - [When to use Shell](#s1.2-when-to-use-shell)                                                                                                                                                                                                                                                                                                       |
+| [Shell Files and Interpreter Invocation](#s2-shell-files-and-interpreter-invocation) | [File Extensions](#s2.1-file-extensions) - [SUID/SGID](#s2.2-suid-sgid)                                                                                                                                                                                                                                                                                                                             |
+| [Environment](#s3-environment)                                                       | [STDOUT vs STDERR](#s3.1-stdout-vs-stderr)                                                                                                                                                                                                                                                                                                                                                          |
+| [Comments](#s4-comments)                                                             | [File Header](#s4.1-file-header) - [Function Comments](#s4.2-function-comments) - [Implementation Comments](#s4.3-implementation-comments) - [TODO Comments](#s4.4-todo-comments)                                                                                                                                                                                                                   |
+| [Formatting](#s5-formatting)                                                         | [Indentation](#s5.1-indentation) - [Line Length and Long Strings](#s5.2-line-length-and-long-strings) - [Pipelines](#s5.3-pipelines) - [Loops](#s5.4-loops) - [Case statement](#s5.5-case-statement) - [Variable expansion](#s5.6-variable-expansion) - [Quoting](#s5.7-quoting)                                                                                                                    |
+| [Features and Bugs](#s6-features-and-bugs)                                           | [ShellCheck](#s6.1-shellcheck) - [Command Substitution](#s6.2-command-substitution) - [Test, `[… ]`, and `[[… ]]`](#s6.3-tests) - [Testing Strings](#s6.4-testing-strings) - [Wildcard Expansion of Filenames](#s6.5-wildcard-expansion-of-filenames) - [Eval](#s6.6-eval) - [Arrays](#s6.7-arrays) - [Pipes to While](#s6.8-pipes-to-while) - [Arithmetic](#s6.9-arithmetic)                       |
+| [Naming Conventions](#s7-naming-conventions)                                         | [Function Names](#s7.1-function-names) - [Variable Names](#s7.2-variable-names) - [Constants and Environment Variable Names](#s7.3-constants-and-environment-variable-names) - [Source Filenames](#s7.4-source-filenames) - [Read-only Variables](#s7.5-read-only-variables) - [Use Local Variables](#s7.6-use-local-variables) - [Function Location](#s7.7-function-location) - [main](#s7.8-main) |
+| [Calling Commands](#s8-calling-commands)                                             | [Checking Return Values](#s8.1-checking-return-values) - [Builtin Commands vs. External Commands](#s8.2-builtin-commands-vs-external-commands)                                                                                                                                                                                                                                                      |
+| [Conclusion](#s9-conclusion)                                                         |
 
 <a id="s1-background"></a>
 
 ## Background
-
 
 <a id="s1.1-which-shell-to-use"></a>
 
@@ -47,7 +46,7 @@ number of flags. Use `set` to set shell options so that
 calling your script as `bash script_name`
 does not break its functionality.
 
-Restricting all executable shell scripts to *bash* gives us a
+Restricting all executable shell scripts to _bash_ gives us a
 consistent shell language that's installed on all our machines.
 
 The only exception to this is where you're forced to by whatever
@@ -68,17 +67,17 @@ used for widespread deployment.
 
 Some guidelines:
 
-*   If you're mostly calling other utilities and are doing relatively
-    little data manipulation, shell is an acceptable choice for the task.
-*   If performance matters, use something other than shell.
-*   If you are writing a script that is more than 100 lines long, or
-    that uses non-straightforward control flow logic, you should
-    rewrite it in a more structured language *now*. Bear in
-    mind that scripts grow. Rewrite your script early to avoid a more
-    time-consuming rewrite at a later date.
-*   When assessing the complexity of your code (e.g. to decide whether
-    to switch languages) consider whether the code is easily
-    maintainable by people other than its author.
+- If you're mostly calling other utilities and are doing relatively
+  little data manipulation, shell is an acceptable choice for the task.
+- If performance matters, use something other than shell.
+- If you are writing a script that is more than 100 lines long, or
+  that uses non-straightforward control flow logic, you should
+  rewrite it in a more structured language _now_. Bear in
+  mind that scripts grow. Rewrite your script early to avoid a more
+  time-consuming rewrite at a later date.
+- When assessing the complexity of your code (e.g. to decide whether
+  to switch languages) consider whether the code is easily
+  maintainable by people other than its author.
 
 <a id="s2-shell-files-and-interpreter-invocation"></a>
 
@@ -106,7 +105,7 @@ language-specific suffix.
 
 ### SUID/SGID
 
-SUID and SGID are *forbidden* on shell scripts.
+SUID and SGID are _forbidden_ on shell scripts.
 
 There are too many security issues with shell that make it nearly
 impossible to secure sufficiently to allow SUID/SGID. While bash does
@@ -178,12 +177,12 @@ program or to use a function in your library by reading the comments
 
 All function comments should describe the intended API behaviour using:
 
-*   Description of the function.
-*   Globals: List of global variables used and modified.
-*   Arguments: Arguments taken.
-*   Outputs: Output to STDOUT or STDERR.
-*   Returns: Returned values other than the default exit status of the
-    last command run.
+- Description of the function.
+- Globals: List of global variables used and modified.
+- Arguments: Arguments taken.
+- Outputs: Output to STDOUT or STDERR.
+- Returns: Returned values other than the default exit status of the
+  last command run.
 
 Example:
 
@@ -243,7 +242,7 @@ out of the ordinary, put a short comment in.
 Use TODO comments for code that is temporary, a short-term solution, or
 good-enough but not perfect.
 
-This matches the convention in the [C++ Guide](https://google.github.io/styleguide/cppguide.html#TODO_Comments).
+This matches the convention in the [C++ Guide](https://jpg-store.github.io/styleguide/cppguide.html#TODO_Comments).
 
 `TODO`s should include the string `TODO` in all
 caps, followed by the name, e-mail address, or other identifier of the person
@@ -368,12 +367,12 @@ done
 
 ### Case statement
 
-*   Indent alternatives by 2 spaces.
-*   A one-line alternative needs a space after the close parenthesis of
-    the pattern and before the `;;`.
-*   Long or multi-command alternatives should be split over multiple
-    lines with the pattern, actions, and `;;` on separate
-    lines.
+- Indent alternatives by 2 spaces.
+- A one-line alternative needs a space after the close parenthesis of
+  the pattern and before the `;;`.
+- Long or multi-command alternatives should be split over multiple
+  lines with the pattern, actions, and `;;` on separate
+  lines.
 
 The matching expressions are indented one level from the `case` and `esac`.
 Multiline actions are indented another level. In general, there is no need to
@@ -433,70 +432,70 @@ not mandatory doesn't mean it should be taken lightly or downplayed.
 
 They are listed in order of precedence.
 
-*   Stay consistent with what you find for existing code.
-*   Quote variables, see [Quoting section below](#quoting).
-*   Don't brace-delimit single character shell specials / positional parameters,
-    unless strictly necessary or avoiding deep confusion.
+- Stay consistent with what you find for existing code.
+- Quote variables, see [Quoting section below](#quoting).
+- Don't brace-delimit single character shell specials / positional parameters,
+  unless strictly necessary or avoiding deep confusion.
 
-    Prefer brace-delimiting all other variables.
+  Prefer brace-delimiting all other variables.
 
-    ```shell
-    # Section of *recommended* cases.
+  ```shell
+  # Section of *recommended* cases.
 
-    # Preferred style for 'special' variables:
-    echo "Positional: $1" "$5" "$3"
-    echo "Specials: !=$!, -=$-, _=$_. ?=$?, #=$# *=$* @=$@ \$=$$ …"
+  # Preferred style for 'special' variables:
+  echo "Positional: $1" "$5" "$3"
+  echo "Specials: !=$!, -=$-, _=$_. ?=$?, #=$# *=$* @=$@ \$=$$ …"
 
-    # Braces necessary:
-    echo "many parameters: ${10}"
+  # Braces necessary:
+  echo "many parameters: ${10}"
 
-    # Braces avoiding confusion:
-    # Output is "a0b0c0"
-    set -- a b c
-    echo "${1}0${2}0${3}0"
+  # Braces avoiding confusion:
+  # Output is "a0b0c0"
+  set -- a b c
+  echo "${1}0${2}0${3}0"
 
-    # Preferred style for other variables:
-    echo "PATH=${PATH}, PWD=${PWD}, mine=${some_var}"
-    while read -r f; do
-      echo "file=${f}"
-    done < <(find /tmp)
-    ```
+  # Preferred style for other variables:
+  echo "PATH=${PATH}, PWD=${PWD}, mine=${some_var}"
+  while read -r f; do
+    echo "file=${f}"
+  done < <(find /tmp)
+  ```
 
-    ```shell
-    # Section of *discouraged* cases
+  ```shell
+  # Section of *discouraged* cases
 
-    # Unquoted vars, unbraced vars, brace-delimited single letter
-    # shell specials.
-    echo a=$avar "b=$bvar" "PID=${$}" "${1}"
+  # Unquoted vars, unbraced vars, brace-delimited single letter
+  # shell specials.
+  echo a=$avar "b=$bvar" "PID=${$}" "${1}"
 
-    # Confusing use: this is expanded as "${1}0${2}0${3}0",
-    # not "${10}${20}${30}
-    set -- a b c
-    echo "$10$20$30"
-    ```
+  # Confusing use: this is expanded as "${1}0${2}0${3}0",
+  # not "${10}${20}${30}
+  set -- a b c
+  echo "$10$20$30"
+  ```
 
-NOTE: Using braces in `${var}` is *not* a form of quoting. "Double quotes" must
-be used *as well*.
+NOTE: Using braces in `${var}` is _not_ a form of quoting. "Double quotes" must
+be used _as well_.
 
 <a id="s5.7-quoting"></a>
 
 ### Quoting
 
-*   Always quote strings containing variables, command substitutions, spaces or
-    shell meta characters, unless careful unquoted expansion is required or it's
-    a shell-internal integer (see next point).
-*   Use arrays for safe quoting of lists of elements, especially command-line
-    flags. See [Arrays](#arrays) below.
-*   Optionally quote shell-internal, readonly special variables that are defined
-    to be integers: `$?`, `$#`, `$$`, `$!` (man bash). Prefer quoting of "named"
-    internal integer variables, e.g. PPID etc for consistency.
-*   Prefer quoting strings that are "words" (as opposed to command options or
-    path names).
-*   Never quote *literal* integers.
-*   Be aware of the quoting rules for pattern matches in `[[ … ]]`. See the
-    [Test, `[ … ]`, and `[[ … ]]`](#tests) section below.
-*   Use `"$@"` unless you have a specific reason to use `$*`, such as simply
-    appending the arguments to a string in a message or log.
+- Always quote strings containing variables, command substitutions, spaces or
+  shell meta characters, unless careful unquoted expansion is required or it's
+  a shell-internal integer (see next point).
+- Use arrays for safe quoting of lists of elements, especially command-line
+  flags. See [Arrays](#arrays) below.
+- Optionally quote shell-internal, readonly special variables that are defined
+  to be integers: `$?`, `$#`, `$$`, `$!` (man bash). Prefer quoting of "named"
+  internal integer variables, e.g. PPID etc for consistency.
+- Prefer quoting strings that are "words" (as opposed to command options or
+  path names).
+- Never quote _literal_ integers.
+- Be aware of the quoting rules for pattern matches in `[[ … ]]`. See the
+  [Test, `[ … ]`, and `[[ … ]]`](#tests) section below.
+- Use `"$@"` unless you have a specific reason to use `$*`, such as simply
+  appending the arguments to a string in a message or log.
 
 ```shell
 # 'Single' quotes indicate that no substitution is desired.
@@ -603,7 +602,8 @@ var="`command \`command1\``"
 <a id="s6.3-tests"></a>
 
 <a id="tests"></a>
-### Test, `[ … ]`, and `[[ … ]]` 
+
+### Test, `[ … ]`, and `[[ … ]]`
 
 `[[ … ]]` is preferred over `[ … ]`, `test` and `/usr/bin/[`.
 
@@ -758,7 +758,6 @@ removed `./somefile'
 
 `eval` should be avoided.
 
-
 Eval munges the input when used for assignment to variables and can
 set variables without making it possible to check what those variables
 were.
@@ -826,11 +825,11 @@ mybinary $(get_arguments)
 
 #### Arrays Pros
 
-*   Using Arrays allows lists of things without confusing quoting
-    semantics. Conversely, not using arrays leads to misguided
-    attempts to nest quoting inside a string.
-*   Arrays make it possible to safely store sequences/lists of
-    arbitrary strings, including strings containing whitespace.
+- Using Arrays allows lists of things without confusing quoting
+  semantics. Conversely, not using arrays leads to misguided
+  attempts to nest quoting inside a string.
+- Arrays make it possible to safely store sequences/lists of
+  arbitrary strings, including strings containing whitespace.
 
 <a id="s6.7.2-arrays-cons"></a>
 
@@ -906,7 +905,7 @@ echo "${last_line}"
 ```
 
 > Note: Be cautious using a for-loop to iterate over output, as in `for var in
-> $(...)`, as the output is split by whitespace, not by line. Sometimes you will
+$(...)`, as the output is split by whitespace, not by line. Sometimes you will
 > know this is safe because the output can't contain any unexpected whitespace,
 > but where this isn't obvious or doesn't improve readability (such as a long
 > command inside `$(...)`), a `while read` loop or `readarray` is often safer
@@ -925,13 +924,14 @@ command, or the `let` built-in.
 `<` and `>` don't perform numerical
 comparison inside `[[ … ]]` expressions (they perform
 lexicographical comparisons instead; see [Testing Strings](#testing-strings)).
-For preference, don't use `[[ … ]]` *at all* for numeric comparisons, use
+For preference, don't use `[[ … ]]` _at all_ for numeric comparisons, use
 `(( … ))` instead.
 
 It is recommended to avoid using `(( … ))` as a standalone
 statement, and otherwise be wary of its expression evaluating to zero
+
 - particularly with `set -e` enabled. For example,
-`set -e; i=0; (( i++ ))` will cause the shell to exit.
+  `set -e; i=0; (( i++ ))` will cause the shell to exit.
 
 ```shell
 # Simple calculation used as text - note the use of $(( … )) within
@@ -1249,7 +1249,7 @@ fi
 Given the choice between invoking a shell builtin and invoking a
 separate process, choose the builtin.
 
-We prefer the use of builtins such as the *Parameter Expansion*
+We prefer the use of builtins such as the _Parameter Expansion_
 functions in `bash(1)` as it's more robust and portable
 (especially when compared to things like `sed`).
 
@@ -1271,10 +1271,10 @@ substitution="$(echo "${string}" | sed -e 's/^foo/bar/')"
 
 ## Conclusion
 
-Use common sense and *BE CONSISTENT*.
+Use common sense and _BE CONSISTENT_.
 
 Please take a few minutes to read the Parting Words section at the bottom
 of the
-[C++ Guide](https://google.github.io/styleguide/cppguide.html#Parting_Words).
+[C++ Guide](https://jpg-store.github.io/styleguide/cppguide.html#Parting_Words).
 
 Revision 2.02

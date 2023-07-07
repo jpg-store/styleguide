@@ -21,7 +21,7 @@ that apply to that project.
 
 The style guides in this project are licensed under the CC-By 3.0 License, which
 encourages you to share these documents. See
-[https://creativecommons.org/licenses/by/3.0/][ccl] for more details.
+[https://creativecommons.org/licenses/by/3.0/](ccl) for more details.
 
 ## Contributing
 
@@ -30,6 +30,6 @@ Please, feel free to contribute if you have any objections.
 <a rel="license" href="https://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/3.0/88x31.png" /></a>
 
 [go]: go/
-[py]: https://google.github.io/styleguide/pyguide.html
-[htmlcss]: https://google.github.io/styleguide/htmlcssguide.html
-[ts]: https://google.github.io/styleguide/tsguide.html
+[py]: https://jpg-store.github.io/styleguide/pyguide.html
+[htmlcss]: https://jpg-store.github.io/styleguide/htmlcssguide.html
+[ts]: https://jpg-store.github.io/styleguide/tsguide.html

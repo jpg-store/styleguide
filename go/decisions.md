@@ -2,7 +2,7 @@
 
 # Go Style Decisions
 
-https://google.github.io/styleguide/go/decisions
+https://jpg-store.github.io/styleguide/go/decisions
 
 [Overview](index) | [Guide](guide) | [Decisions](decisions) |
 [Best practices](best-practices)
@@ -30,20 +30,20 @@ This document is **not exhaustive** and will grow over time. In cases where
 [the core style guide](guide) contradicts the advice given here, **the style
 guide takes precedence**, and this document should be updated accordingly.
 
-See [the Overview](https://google.github.io/styleguide/go#about) for the full
+See [the Overview](https://jpg-store.github.io/styleguide/go#about) for the full
 set of Go Style documents.
 
 The following sections have moved from style decisions to another part of the
 guide:
 
-*   **MixedCaps**: see [guide#mixed-caps](guide#mixed-caps)
-    <a id="mixed-caps"></a>
+- **MixedCaps**: see [guide#mixed-caps](guide#mixed-caps)
+  <a id="mixed-caps"></a>
 
-*   **Formatting**: see [guide#formatting](guide#formatting)
-    <a id="formatting"></a>
+- **Formatting**: see [guide#formatting](guide#formatting)
+  <a id="formatting"></a>
 
-*   **Line Length**: see [guide#line-length](guide#line-length)
-    <a id="line-length"></a>
+- **Line Length**: see [guide#line-length](guide#line-length)
+  <a id="line-length"></a>
 
 <a id="naming"></a>
 
@@ -93,11 +93,11 @@ must be renamed at import time to a name that is suitable for use in Go code.
 An exception to this is that package names that are only imported by generated
 code may contain underscores. Specific examples include:
 
-*   Using the `_test` suffix for an external test package, for example an
-    integration test
+- Using the `_test` suffix for an external test package, for example an
+  integration test
 
-*   Using the `_test` suffix for
-    [package-level documentation examples](https://go.dev/blog/examples)
+- Using the `_test` suffix for
+  [package-level documentation examples](https://go.dev/blog/examples)
 
 [`tabwriter`]: https://pkg.go.dev/text/tabwriter
 [shadowed]: best-practices#shadowing
@@ -125,16 +125,16 @@ See also: [Go blog post about package names](https://go.dev/blog/package-names).
 
 [Receiver] variable names must be:
 
-*   Short (usually one or two letters in length)
-*   Abbreviations for the type itself
-*   Applied consistently to every receiver for that type
+- Short (usually one or two letters in length)
+- Abbreviations for the type itself
+- Applied consistently to every receiver for that type
 
-Long Name                   | Better Name
---------------------------- | -------------------------
-`func (tray Tray)`          | `func (t Tray)`
-`func (info *ResearchInfo)` | `func (ri *ResearchInfo)`
-`func (this *ReportWriter)` | `func (w *ReportWriter)`
-`func (self *Scanner)`      | `func (s *Scanner)`
+| Long Name                   | Better Name               |
+| --------------------------- | ------------------------- |
+| `func (tray Tray)`          | `func (t Tray)`           |
+| `func (info *ResearchInfo)` | `func (ri *ResearchInfo)` |
+| `func (this *ReportWriter)` | `func (w *ReportWriter)`  |
+| `func (self *Scanner)`      | `func (s *Scanner)`       |
 
 [Receiver]: https://golang.org/ref/spec#Method_declarations
 
@@ -198,29 +198,29 @@ have the same case. `URL` should appear as `URL` or `url` (as in `urlPony`, or
 `URLPony`), never as `Url`. This also applies to `ID` when it is short for
 "identifier"; write `appID` instead of `appId`.
 
-*   In names with multiple initialisms (e.g. `XMLAPI` because it contains `XML`
-    and `API`), each letter within a given initialism should have the same case,
-    but each initialism in the name does not need to have the same case.
-*   In names with an initialism containing a lowercase letter (e.g. `DDoS`,
-    `iOS`, `gRPC`), the initialism should appear as it would in standard prose,
-    unless you need to change the first letter for the sake of [exportedness].
-    In these cases, the entire initialism should be the same case (e.g. `ddos`,
-    `IOS`, `GRPC`).
+- In names with multiple initialisms (e.g. `XMLAPI` because it contains `XML`
+  and `API`), each letter within a given initialism should have the same case,
+  but each initialism in the name does not need to have the same case.
+- In names with an initialism containing a lowercase letter (e.g. `DDoS`,
+  `iOS`, `gRPC`), the initialism should appear as it would in standard prose,
+  unless you need to change the first letter for the sake of [exportedness].
+  In these cases, the entire initialism should be the same case (e.g. `ddos`,
+  `IOS`, `GRPC`).
 
 [exportedness]: https://golang.org/ref/spec#Exported_identifiers
 
 <!-- Keep this table narrow. If it must grow wider, replace with a list. -->
 
-Initialism(s) | Scope      | Correct  | Incorrect
-------------- | ---------- | -------- | --------------------------------------
-XML API       | Exported   | `XMLAPI` | `XmlApi`, `XMLApi`, `XmlAPI`, `XMLapi`
-XML API       | Unexported | `xmlAPI` | `xmlapi`, `xmlApi`
-iOS           | Exported   | `IOS`    | `Ios`, `IoS`
-iOS           | Unexported | `iOS`    | `ios`
-gRPC          | Exported   | `GRPC`   | `Grpc`
-gRPC          | Unexported | `gRPC`   | `grpc`
-DDoS          | Exported   | `DDoS`   | `DDOS`, `Ddos`
-DDoS          | Unexported | `ddos`   | `dDoS`, `dDOS`
+| Initialism(s) | Scope      | Correct  | Incorrect                              |
+| ------------- | ---------- | -------- | -------------------------------------- |
+| XML API       | Exported   | `XMLAPI` | `XmlApi`, `XMLApi`, `XmlAPI`, `XMLapi` |
+| XML API       | Unexported | `xmlAPI` | `xmlapi`, `xmlApi`                     |
+| iOS           | Exported   | `IOS`    | `Ios`, `IoS`                           |
+| iOS           | Unexported | `iOS`    | `ios`                                  |
+| gRPC          | Exported   | `GRPC`   | `Grpc`                                 |
+| gRPC          | Unexported | `gRPC`   | `grpc`                                 |
+| DDoS          | Exported   | `DDoS`   | `DDOS`, `Ddos`                         |
+| DDoS          | Unexported | `ddos`   | `dDoS`, `dDOS`                         |
 
 <!--#include file="/go/g3doc/style/includes/special-name-exception.md"-->
 
@@ -257,12 +257,12 @@ information.
 Here is a rough baseline. These numeric guidelines are not strict rules. Apply
 judgement based on context, [clarity], and [concision].
 
-*   A small scope is one in which one or two small operations are performed, say
-    1-7 lines.
-*   A medium scope is a few small or one large operation, say 8-15 lines.
-*   A large scope is one or a few large operations, say 15-25 lines.
-*   A very large scope is anything that spans more than a page (say, more than
-    25 lines).
+- A small scope is one in which one or two small operations are performed, say
+  1-7 lines.
+- A medium scope is a few small or one large operation, say 8-15 lines.
+- A large scope is one or a few large operations, say 15-25 lines.
+- A very large scope is anything that spans more than a page (say, more than
+  25 lines).
 
 [clarity]: guide#clarity
 [concision]: guide#concision
@@ -288,22 +288,22 @@ as the struct or protocol buffer field name.
 
 In general:
 
-*   Single-word names like `count` or `options` are a good starting point.
-*   Additional words can be added to disambiguate similar names, for example
-    `userCount` and `projectCount`.
-*   Do not simply drop letters to save typing. For example `Sandbox` is
-    preferred over `Sbx`, particularly for exported names.
-*   Omit [types and type-like words] from most variable names.
-    *   For a number, `userCount` is a better name than `numUsers` or
-        `usersInt`.
-    *   For a slice, `users` is a better name than `userSlice`.
-    *   It is acceptable to include a type-like qualifier if there are two
-        versions of a value in scope, for example you might have an input stored
-        in `ageString` and use `age` for the parsed value.
-*   Omit words that are clear from the [surrounding context]. For example, in
-    the implementation of a `UserCount` method, a local variable called
-    `userCount` is probably redundant; `count`, `users`, or even `c` are just as
-    readable.
+- Single-word names like `count` or `options` are a good starting point.
+- Additional words can be added to disambiguate similar names, for example
+  `userCount` and `projectCount`.
+- Do not simply drop letters to save typing. For example `Sandbox` is
+  preferred over `Sbx`, particularly for exported names.
+- Omit [types and type-like words] from most variable names.
+  - For a number, `userCount` is a better name than `numUsers` or
+    `usersInt`.
+  - For a slice, `users` is a better name than `userSlice`.
+  - It is acceptable to include a type-like qualifier if there are two
+    versions of a value in scope, for example you might have an input stored
+    in `ageString` and use `age` for the parsed value.
+- Omit words that are clear from the [surrounding context]. For example, in
+  the implementation of a `UserCount` method, a local variable called
+  `userCount` is probably redundant; `count`, `users`, or even `c` are just as
+  readable.
 
 [types and type-like words]: #repetitive-with-type
 [surrounding context]: #repetitive-in-context
@@ -319,15 +319,15 @@ for it to appear in place of the single-letter variable.
 
 In general:
 
-*   For a [method receiver variable], a one-letter or two-letter name is
-    preferred.
-*   Using familiar variable names for common types is often helpful:
-    *   `r` for an `io.Reader` or `*http.Request`
-    *   `w` for an `io.Writer` or `http.ResponseWriter`
-*   Single-letter identifiers are acceptable as integer loop variables,
-    particularly for indices (e.g., `i`) and coordinates (e.g., `x` and `y`).
-*   Abbreviations can be acceptable loop identifiers when the scope is short,
-    for example `for _, n := range nodes { ... }`.
+- For a [method receiver variable], a one-letter or two-letter name is
+  preferred.
+- Using familiar variable names for common types is often helpful:
+  - `r` for an `io.Reader` or `*http.Request`
+  - `w` for an `io.Writer` or `http.ResponseWriter`
+- Single-letter identifiers are acceptable as integer loop variables,
+  particularly for indices (e.g., `i`) and coordinates (e.g., `x` and `y`).
+- Abbreviations can be acceptable loop identifiers when the scope is short,
+  for example `for _, n := range nodes { ... }`.
 
 [method receiver variable]: #receiver-names
 
@@ -359,13 +359,13 @@ itself, the canonical name for the constructor is `New` if one is required.
 
 > **Examples:** Repetitive Name -> Better Name
 >
-> *   `widget.NewWidget` -> `widget.New`
-> *   `widget.NewWidgetWithName` -> `widget.NewWithName`
-> *   `db.LoadFromDatabase` -> `db.Load`
-> *   `goatteleportutil.CountGoatsTeleported` -> `gtutil.CountGoatsTeleported`
->     or `goatteleport.Count`
-> *   `myteampb.MyTeamMethodRequest` -> `mtpb.MyTeamMethodRequest` or
->     `myteampb.MethodRequest`
+> - `widget.NewWidget` -> `widget.New`
+> - `widget.NewWidgetWithName` -> `widget.NewWithName`
+> - `db.LoadFromDatabase` -> `db.Load`
+> - `goatteleportutil.CountGoatsTeleported` -> `gtutil.CountGoatsTeleported`
+>   or `goatteleport.Count`
+> - `myteampb.MyTeamMethodRequest` -> `mtpb.MyTeamMethodRequest` or
+>   `myteampb.MethodRequest`
 
 <a id="repetitive-with-type"></a>
 
@@ -376,11 +376,11 @@ clear to the reader what type a variable is by how it is used. It is only
 necessary to clarify the type of a variable if its value appears twice in the
 same scope.
 
-Repetitive Name               | Better Name
------------------------------ | ----------------------
-`var numUsers int`            | `var users int`
-`var nameString string`       | `var name string`
-`var primaryProject *Project` | `var primary *Project`
+| Repetitive Name               | Better Name            |
+| ----------------------------- | ---------------------- |
+| `var numUsers int`            | `var users int`        |
+| `var nameString string`       | `var name string`      |
+| `var primaryProject *Project` | `var primary *Project` |
 
 If the value appears in multiple forms, this can be clarified either with an
 extra word like `raw` and `parsed` or with the underlying representation:
@@ -502,7 +502,7 @@ should usually be indented to avoid linewrapping. Apart from indentation,
 decoration should generally be avoided.
 
 [doc preview]: best-practices#documentation-preview
-[documentation conventions]:  best-practices#documentation-conventions
+[documentation conventions]: best-practices#documentation-conventions
 
 <a id="comment-line-length"></a>
 
@@ -737,7 +737,7 @@ in a deferred closure.
 > document.
 
 [Naked returns]: https://tour.golang.org/basics/7
-[GoTip #38: Functions as Named Types]: https://google.github.io/styleguide/go/index.html#gotip
+[GoTip #38: Functions as Named Types]: https://jpg-store.github.io/styleguide/go/index.html#gotip
 [`WithTimeout`]: https://pkg.go.dev/context#WithTimeout
 [`CancelFunc`]: https://pkg.go.dev/context#CancelFunc
 
@@ -788,32 +788,32 @@ command-line invocation.
 
 Tips:
 
-*   Example command-line invocations and API usage can be useful documentation.
-    For Godoc formatting, indent the comment lines containing code.
+- Example command-line invocations and API usage can be useful documentation.
+  For Godoc formatting, indent the comment lines containing code.
 
-*   If there is no obvious primary file or if the package comment is
-    extraordinarily long, it is acceptable to put the doc comment in a file
-    named `doc.go` with only the comment and the package clause.
+- If there is no obvious primary file or if the package comment is
+  extraordinarily long, it is acceptable to put the doc comment in a file
+  named `doc.go` with only the comment and the package clause.
 
-*   Multiline comments can be used instead of multiple single-line comments.
-    This is primarily useful if the documentation contains sections which may be
-    useful to copy and paste from the source file, as with sample command-lines
-    (for binaries) and template examples.
+- Multiline comments can be used instead of multiple single-line comments.
+  This is primarily useful if the documentation contains sections which may be
+  useful to copy and paste from the source file, as with sample command-lines
+  (for binaries) and template examples.
 
-    ```go
-    // Good:
-    /*
-    The seed_generator command is a utility that generates a Finch seed file
-    from a set of JSON study configs.
+  ```go
+  // Good:
+  /*
+  The seed_generator command is a utility that generates a Finch seed file
+  from a set of JSON study configs.
 
-        seed_generator *.json | base64 > finch-seed.base64
-    */
-    package template
-    ```
+      seed_generator *.json | base64 > finch-seed.base64
+  */
+  package template
+  ```
 
-*   Comments intended for maintainers and that apply to the whole file are
-    typically placed after import declarations. These are not surfaced in Godoc
-    and are not subject to the rules above on package comments.
+- Comments intended for maintainers and that apply to the whole file are
+  typically placed after import declarations. These are not surfaced in Godoc
+  and are not subject to the rules above on package comments.
 
 <a id="imports"></a>
 
@@ -875,9 +875,9 @@ in scope.
 
 Imports should be organized in two groups:
 
-*   Standard library packages
+- Standard library packages
 
-*   Other (project and vendored) packages
+- Other (project and vendored) packages
 
 ```go
 // Good:
@@ -951,9 +951,9 @@ them.
 
 Some examples of such packages include:
 
-*   [time/tzdata](https://pkg.go.dev/time/tzdata)
+- [time/tzdata](https://pkg.go.dev/time/tzdata)
 
-*   [image/jpeg](https://pkg.go.dev/image/jpeg) in image processing code
+- [image/jpeg](https://pkg.go.dev/image/jpeg) in image processing code
 
 Avoid blank imports in library packages, even if the library indirectly depends
 on them. Constraining side-effect imports to the main package helps control
@@ -962,11 +962,11 @@ import without conflict or wasted build costs.
 
 The following are the only exceptions to this rule:
 
-*   You may use a blank import to bypass the check for disallowed imports in the
-    [nogo static checker].
+- You may use a blank import to bypass the check for disallowed imports in the
+  [nogo static checker].
 
-*   You may use a blank import of the [embed](https://pkg.go.dev/embed) package
-    in a source file which uses the `//go:embed` compiler directive.
+- You may use a blank import of the [embed](https://pkg.go.dev/embed) package
+  in a source file which uses the `//go:embed` compiler directive.
 
 **Tip:** If you create a library package that indirectly depends on a
 side-effect import in production, document the intended usage.
@@ -1103,10 +1103,10 @@ Code that encounters an error should make a deliberate choice about how to
 handle it. It is not usually appropriate to discard errors using `_` variables.
 If a function returns an error, do one of the following:
 
-*   Handle and address the error immediately.
-*   Return the error to the caller.
-*   In exceptional situations, call [`log.Fatal`] or (if absolutely necessary)
-    `panic`.
+- Handle and address the error immediately.
+- Return the error to the caller.
+- In exceptional situations, call [`log.Fatal`] or (if absolutely necessary)
+  `panic`.
 
 **Note:** `log.Fatalf` is not the standard library log. See [#logging].
 
@@ -1250,7 +1250,7 @@ See [Go Tip #1: Line of Sight] and
 [TotT: Reduce Code Complexity by Reducing Nesting](https://testing.googleblog.com/2017/06/code-health-reduce-nesting-reduce.html)
 for more details.
 
-[Go Tip #1: Line of Sight]: https://google.github.io/styleguide/go/index.html#gotip
+[Go Tip #1: Line of Sight]: https://jpg-store.github.io/styleguide/go/index.html#gotip
 
 <a id="language"></a>
 
@@ -1276,56 +1276,56 @@ maintainable.
 Struct literals should usually specify **field names** for types defined outside
 the current package.
 
-*   Include field names for types from other packages.
+- Include field names for types from other packages.
 
-    ```go
-    // Good:
-    good := otherpkg.Type{A: 42}
-    ```
+  ```go
+  // Good:
+  good := otherpkg.Type{A: 42}
+  ```
 
-    The position of fields in a struct and the full set of fields (both of which
-    are necessary to get right when field names are omitted) are not usually
-    considered to be part of a struct's public API; specifying the field name is
-    needed to avoid unnecessary coupling.
+  The position of fields in a struct and the full set of fields (both of which
+  are necessary to get right when field names are omitted) are not usually
+  considered to be part of a struct's public API; specifying the field name is
+  needed to avoid unnecessary coupling.
 
-    ```go
-    // Bad:
-    // https://pkg.go.dev/encoding/csv#Reader
-    r := csv.Reader{',', '#', 4, false, false, false, false}
-    ```
+  ```go
+  // Bad:
+  // https://pkg.go.dev/encoding/csv#Reader
+  r := csv.Reader{',', '#', 4, false, false, false, false}
+  ```
 
-    Field names may be omitted within small, simple structs whose composition
-    and order are documented as being stable.
+  Field names may be omitted within small, simple structs whose composition
+  and order are documented as being stable.
 
-    ```go
-    // Good:
-    okay := image.Point{42, 54}
-    also := image.Point{X: 42, Y: 54}
-    ```
+  ```go
+  // Good:
+  okay := image.Point{42, 54}
+  also := image.Point{X: 42, Y: 54}
+  ```
 
-*   For package-local types, field names are optional.
+- For package-local types, field names are optional.
 
-    ```go
-    // Good:
-    okay := Type{42}
-    also := internalType{4, 2}
-    ```
+  ```go
+  // Good:
+  okay := Type{42}
+  also := internalType{4, 2}
+  ```
 
-    Field names should still be used if it makes the code clearer, and it is
-    very common to do so. For example, a struct with a large number of fields
-    should almost always be initialized with field names.
+  Field names should still be used if it makes the code clearer, and it is
+  very common to do so. For example, a struct with a large number of fields
+  should almost always be initialized with field names.
 
-    <!-- TODO: Maybe a better example here that doesn't have many fields. -->
+  <!-- TODO: Maybe a better example here that doesn't have many fields. -->
 
-    ```go
-    // Good:
-    okay := StructWithLotsOfFields{
-      field1: 1,
-      field2: "two",
-      field3: 3.14,
-      field4: true,
-    }
-    ```
+  ```go
+  // Good:
+  okay := StructWithLotsOfFields{
+    field1: 1,
+    field2: "two",
+    field3: 3.14,
+    field4: true,
+  }
+  ```
 
 <a id="literal-matching-braces"></a>
 
@@ -1376,9 +1376,9 @@ bad := []*Type{
 Dropping whitespace between braces (aka "cuddling" them) for slice and array
 literals is only permitted when both of the following are true.
 
-*   The [indentation matches](#literal-matching-braces)
-*   The inner values are also literals or proto builders (i.e. not a variable or
-    other expression)
+- The [indentation matches](#literal-matching-braces)
+- The inner values are also literals or proto builders (i.e. not a variable or
+  other expression)
 
 ```go
 // Good:
@@ -1693,9 +1693,9 @@ if longCondition1 && longCondition2 &&
 
 See the following sections for specific guidelines and examples:
 
-*   [Function formatting](#func-formatting)
-*   [Conditionals and loops](#conditional-formatting)
-*   [Literal formatting](#literal-formatting)
+- [Function formatting](#func-formatting)
+- [Conditionals and loops](#conditional-formatting)
+- [Literal formatting](#literal-formatting)
 
 <a id="func-formatting"></a>
 
@@ -2252,20 +2252,20 @@ func (w *Worker) Run() {
 
 This code may look OK, but there are several underlying problems:
 
-*   The code probably has undefined behavior in production, and the program may
-    not terminate cleanly, even if the operating system releases the resources.
+- The code probably has undefined behavior in production, and the program may
+  not terminate cleanly, even if the operating system releases the resources.
 
-*   The code is difficult to test meaningfully due to the code's indeterminate
-    lifecycle.
+- The code is difficult to test meaningfully due to the code's indeterminate
+  lifecycle.
 
-*   The code may leak resources as described above.
+- The code may leak resources as described above.
 
 See also:
 
-*   [Never start a goroutine without knowing how it will stop][cheney-stop]
-*   Rethinking Classical Concurrency Patterns: [slides][rethinking-slides],
-    [video][rethinking-video]
-*   [When Go programs end]
+- [Never start a goroutine without knowing how it will stop][cheney-stop]
+- Rethinking Classical Concurrency Patterns: [slides][rethinking-slides],
+  [video][rethinking-video]
+- [When Go programs end]
 
 [synchronous functions]: #synchronous-functions
 [cheney-stop]: https://dave.cheney.net/2016/12/22/never-start-a-goroutine-without-knowing-how-it-will-stop
@@ -2279,8 +2279,8 @@ See also:
 
 <a id="TOC-Interfaces"></a>
 
-Go interfaces generally belong in the package that *consumes* values of the
-interface type, not a package that *implements* the interface type. The
+Go interfaces generally belong in the package that _consumes_ values of the
+interface type, not a package that _implements_ the interface type. The
 implementing package should return concrete (usually pointer or struct) types.
 That way, new methods can be added to implementations without requiring
 extensive refactoring. See [GoTip #49: Accept Interfaces, Return Concrete Types]
@@ -2312,9 +2312,9 @@ Do not export interfaces that the users of the package do not need.
 
 **TODO:** Write a more in-depth doc on interfaces and link to it here.
 
-[GoTip #42: Authoring a Stub for Testing]: https://google.github.io/styleguide/go/index.html#gotip
-[GoTip #49: Accept Interfaces, Return Concrete Types]: https://google.github.io/styleguide/go/index.html#gotip
-[GoTip #78: Minimal Viable Interfaces]: https://google.github.io/styleguide/go/index.html#gotip
+[GoTip #42: Authoring a Stub for Testing]: https://jpg-store.github.io/styleguide/go/index.html#gotip
+[GoTip #49: Accept Interfaces, Return Concrete Types]: https://jpg-store.github.io/styleguide/go/index.html#gotip
+[GoTip #78: Minimal Viable Interfaces]: https://jpg-store.github.io/styleguide/go/index.html#gotip
 [real implementation]: best-practices#use-real-transports
 [public API]: https://abseil.io/resources/swe-book/html/ch12.html#test_via_public_apis
 [double types]: https://abseil.io/resources/swe-book/html/ch13.html#techniques_for_using_test_doubles
@@ -2391,18 +2391,18 @@ practices. For testing, be especially wary of introducing
 
 In general:
 
-*   [Write code, don't design types]. From a GopherCon talk by Robert Griesemer
-    and Ian Lance Taylor.
-*   If you have several types that share a useful unifying interface, consider
-    modeling the solution using that interface. Generics may not be needed.
-*   Otherwise, instead of relying on the `any` type and excessive
-    [type switching](https://tour.golang.org/methods/16), consider generics.
+- [Write code, don't design types]. From a GopherCon talk by Robert Griesemer
+  and Ian Lance Taylor.
+- If you have several types that share a useful unifying interface, consider
+  modeling the solution using that interface. Generics may not be needed.
+- Otherwise, instead of relying on the `any` type and excessive
+  [type switching](https://tour.golang.org/methods/16), consider generics.
 
 See also:
 
-*   [Using Generics in Go], talk by Ian Lance Taylor
+- [Using Generics in Go], talk by Ian Lance Taylor
 
-*   [Generics tutorial] on Go's webpage
+- [Generics tutorial] on Go's webpage
 
 [Generics tutorial]: https://go.dev/doc/tutorial/generics
 [Type Parameters]: https://go.dev/design/43651-type-parameters
@@ -2448,109 +2448,109 @@ use values for simple [plain old data].
 
 The list below spells out each case in further detail:
 
-*   If the receiver is a slice and the method doesn't reslice or reallocate the
-    slice, use a value rather than a pointer.
+- If the receiver is a slice and the method doesn't reslice or reallocate the
+  slice, use a value rather than a pointer.
 
-    ```go
-    // Good:
-    type Buffer []byte
+  ```go
+  // Good:
+  type Buffer []byte
 
-    func (b Buffer) Len() int { return len(b) }
-    ```
+  func (b Buffer) Len() int { return len(b) }
+  ```
 
-*   If the method needs to mutate the receiver, the receiver must be a pointer.
+- If the method needs to mutate the receiver, the receiver must be a pointer.
 
-    ```go
-    // Good:
-    type Counter int
+  ```go
+  // Good:
+  type Counter int
 
-    func (c *Counter) Inc() { *c++ }
+  func (c *Counter) Inc() { *c++ }
 
-    // See https://pkg.go.dev/container/heap.
-    type Queue []Item
+  // See https://pkg.go.dev/container/heap.
+  type Queue []Item
 
-    func (q *Queue) Push(x Item) { *q = append([]Item{x}, *q...) }
-    ```
+  func (q *Queue) Push(x Item) { *q = append([]Item{x}, *q...) }
+  ```
 
-*   If the receiver is a struct containing fields that
-    [cannot safely be copied](#copying), use a pointer receiver. Common examples
-    are [`sync.Mutex`] and other synchronization types.
+- If the receiver is a struct containing fields that
+  [cannot safely be copied](#copying), use a pointer receiver. Common examples
+  are [`sync.Mutex`] and other synchronization types.
 
-    ```go
-    // Good:
-    type Counter struct {
-        mu    sync.Mutex
-        total int
-    }
+  ```go
+  // Good:
+  type Counter struct {
+      mu    sync.Mutex
+      total int
+  }
 
-    func (c *Counter) Inc() {
-        c.mu.Lock()
-        defer c.mu.Unlock()
-        c.total++
-    }
-    ```
+  func (c *Counter) Inc() {
+      c.mu.Lock()
+      defer c.mu.Unlock()
+      c.total++
+  }
+  ```
 
-    **Tip:** Check the type's [Godoc] for information about whether it is safe
-    or unsafe to copy.
+  **Tip:** Check the type's [Godoc] for information about whether it is safe
+  or unsafe to copy.
 
-*   If the receiver is a "large" struct or array, a pointer receiver may be more
-    efficient. Passing a struct is equivalent to passing all of its fields or
-    elements as arguments to the method. If that seems too large to
-    [pass by value](#pass-values), a pointer is a good choice.
+- If the receiver is a "large" struct or array, a pointer receiver may be more
+  efficient. Passing a struct is equivalent to passing all of its fields or
+  elements as arguments to the method. If that seems too large to
+  [pass by value](#pass-values), a pointer is a good choice.
 
-*   For methods that will call or run concurrently with other functions that
-    modify the receiver, use a value if those modifications should not be
-    visible to your method; otherwise use a pointer.
+- For methods that will call or run concurrently with other functions that
+  modify the receiver, use a value if those modifications should not be
+  visible to your method; otherwise use a pointer.
 
-*   If the receiver is a struct or array, any of whose elements is a pointer to
-    something that may be mutated, prefer a pointer receiver to make the
-    intention of mutability clear to the reader.
+- If the receiver is a struct or array, any of whose elements is a pointer to
+  something that may be mutated, prefer a pointer receiver to make the
+  intention of mutability clear to the reader.
 
-    ```go
-    // Good:
-    type Counter struct {
-        m *Metric
-    }
+  ```go
+  // Good:
+  type Counter struct {
+      m *Metric
+  }
 
-    func (c *Counter) Inc() {
-        c.m.Add(1)
-    }
-    ```
+  func (c *Counter) Inc() {
+      c.m.Add(1)
+  }
+  ```
 
-*   If the receiver is a [built-in type], such as an integer or a string, that
-    does not need to be modified, use a value.
+- If the receiver is a [built-in type], such as an integer or a string, that
+  does not need to be modified, use a value.
 
-    ```go
-    // Good:
-    type User string
+  ```go
+  // Good:
+  type User string
 
-    func (u User) String() { return string(u) }
-    ```
+  func (u User) String() { return string(u) }
+  ```
 
-*   If the receiver is a map, function, or channel, use a value rather than a
-    pointer.
+- If the receiver is a map, function, or channel, use a value rather than a
+  pointer.
 
-    ```go
-    // Good:
-    // See https://pkg.go.dev/net/http#Header.
-    type Header map[string][]string
+  ```go
+  // Good:
+  // See https://pkg.go.dev/net/http#Header.
+  type Header map[string][]string
 
-    func (h Header) Add(key, value string) { /* omitted */ }
-    ```
+  func (h Header) Add(key, value string) { /* omitted */ }
+  ```
 
-*   If the receiver is a "small" array or struct that is naturally a value type
-    with no mutable fields and no pointers, a value receiver is usually the
-    right choice.
+- If the receiver is a "small" array or struct that is naturally a value type
+  with no mutable fields and no pointers, a value receiver is usually the
+  right choice.
 
-    ```go
-    // Good:
-    // See https://pkg.go.dev/time#Time.
-    type Time struct { /* omitted */ }
+  ```go
+  // Good:
+  // See https://pkg.go.dev/time#Time.
+  type Time struct { /* omitted */ }
 
-    func (t Time) Add(d Duration) Time { /* omitted */ }
-    ```
+  func (t Time) Add(d Duration) Time { /* omitted */ }
+  ```
 
-*   When in doubt, use a pointer receiver.
+- When in doubt, use a pointer receiver.
 
 As a general guideline, prefer to make the methods for a type either all pointer
 methods or all value methods.
@@ -2649,8 +2649,8 @@ remove unnecessary concurrency at the caller side.
 
 See also:
 
-*   "Rethinking Classical Concurrency Patterns", talk by Bryan Mills:
-    [slides][rethinking-slides], [video][rethinking-video]
+- "Rethinking Classical Concurrency Patterns", talk by Bryan Mills:
+  [slides][rethinking-slides], [video][rethinking-video]
 
 <a id="type-aliases"></a>
 
@@ -2658,7 +2658,7 @@ See also:
 
 <a id="TOC-TypeAliases"></a>
 
-Use a *type definition*, `type T1 T2`, to define a new type. Use a
+Use a _type definition_, `type T1 T2`, to define a new type. Use a
 [*type alias*], `type T1 = T2`, to refer to an existing type without defining a
 new type. Type aliases are rare; their primary use is to aid migrating packages
 to new source code locations. Don't use type aliasing when it is not needed.
@@ -2751,9 +2751,9 @@ with subcommands.
 
 See also:
 
-*   [Tip of the Week #45: Avoid Flags, Especially in Library Code][totw-45]
-*   [Go Tip #10: Configuration Structs and Flags](https://google.github.io/styleguide/go/index.html#gotip)
-*   [Go Tip #80: Dependency Injection Principles](https://google.github.io/styleguide/go/index.html#gotip)
+- [Tip of the Week #45: Avoid Flags, Especially in Library Code][totw-45]
+- [Go Tip #10: Configuration Structs and Flags](https://jpg-store.github.io/styleguide/go/index.html#gotip)
+- [Go Tip #80: Dependency Injection Principles](https://jpg-store.github.io/styleguide/go/index.html#gotip)
 
 [standard `flag` package]: https://golang.org/pkg/flag/
 [mixed caps]: guide#mixed-caps
@@ -2780,10 +2780,10 @@ formatting to do.
 
 See also:
 
-*   Best practices on [logging errors](best-practices#error-logging) and
-    [custom verbosily levels](best-practices#vlog)
-*   When and how to use the log package to
-    [stop the program](best-practices#checks-and-panics)
+- Best practices on [logging errors](best-practices#error-logging) and
+  [custom verbosily levels](best-practices#vlog)
+- When and how to use the log package to
+  [stop the program](best-practices#checks-and-panics)
 
 [standard `log` package]: https://pkg.go.dev/log
 [package `glog`]: https://pkg.go.dev/github.com/golang/glog
@@ -2813,20 +2813,20 @@ func F(ctx context.Context /* other arguments */) {}
 
 Exceptions are:
 
-*   In an HTTP handler, where the context comes from
-    [`req.Context()`](https://pkg.go.dev/net/http#Request.Context).
-*   In streaming RPC methods, where the context comes from the stream.
+- In an HTTP handler, where the context comes from
+  [`req.Context()`](https://pkg.go.dev/net/http#Request.Context).
+- In streaming RPC methods, where the context comes from the stream.
 
-    Code using gRPC streaming accesses a context from a `Context()` method in
-    the generated server type, which implements `grpc.ServerStream`. See
-    [gRPC Generated Code documentation](https://grpc.io/docs/languages/go/generated-code/).
+  Code using gRPC streaming accesses a context from a `Context()` method in
+  the generated server type, which implements `grpc.ServerStream`. See
+  [gRPC Generated Code documentation](https://grpc.io/docs/languages/go/generated-code/).
 
-*   In entrypoint functions (see below for examples of such functions), use
-    [`context.Background()`](https://pkg.go.dev/context/#Background).
+- In entrypoint functions (see below for examples of such functions), use
+  [`context.Background()`](https://pkg.go.dev/context/#Background).
 
-    *   In binary targets: `main`
-    *   In general purpose code and libraries: `init`
-    *   In tests: `TestXXX`, `BenchmarkXXX`, `FuzzXXX`
+  - In binary targets: `main`
+  - In general purpose code and libraries: `init`
+  - In tests: `TestXXX`, `BenchmarkXXX`, `FuzzXXX`
 
 > **Note**: It is very rare for code in the middle of a callchain to require
 > creating a base context of its own using `context.Background()`. Always prefer
@@ -2874,7 +2874,7 @@ trace, and so on.
 
 See also:
 
-*   [Contexts and structs]
+- [Contexts and structs]
 
 [Contexts and structs]: https://go.dev/blog/context-and-structs
 
@@ -2940,10 +2940,10 @@ func Key() string {
 It should be possible to diagnose a test's failure without reading the test's
 source. Tests should fail with helpful messages detailing:
 
-*   What caused the failure
-*   What inputs resulted in an error
-*   The actual result
-*   What was expected
+- What caused the failure
+- What inputs resulted in an error
+- The actual result
+- What was expected
 
 Specific conventions for achieving this goal are outlined below.
 
@@ -3039,10 +3039,10 @@ directly, independently of any tests that use it.
 
 See also:
 
-*   [Equality comparison and diffs](#types-of-equality)
-*   [Print diffs](#print-diffs)
-*   For more on the distinction between test helpers and assertion helpers, see
-    [best practices](best-practices#test-functions)
+- [Equality comparison and diffs](#types-of-equality)
+- [Print diffs](#print-diffs)
+- For more on the distinction between test helpers and assertion helpers, see
+  [best practices](best-practices#test-functions)
 
 [useful failure messages]: #useful-test-failures
 [`fmt`]: https://golang.org/pkg/fmt/
@@ -3165,7 +3165,7 @@ condition, when subsequent comparison failures are not going to be meaningful.
 
 For table-driven test, consider using subtests and use `t.Fatal` rather than
 `t.Error` and `continue`. See also
-[GoTip #25: Subtests: Making Your Tests Lean](https://google.github.io/styleguide/go/index.html#gotip).
+[GoTip #25: Subtests: Making Your Tests Lean](https://jpg-store.github.io/styleguide/go/index.html#gotip).
 
 **Best practice:** For more discussion about when `t.Fatal` should be used, see
 [best practices](best-practices#t-fatal).
@@ -3223,17 +3223,17 @@ It is user-configurable and should serve most comparison needs.
 Existing code may make use of the following older libraries, and may continue
 using them for consistency:
 
-*   [`pretty`] produces aesthetically pleasing difference reports. However, it
-    quite deliberately considers values that have the same visual representation
-    as equal. In particular, `pretty` does not catch differences between nil
-    slices and empty ones, is not sensitive to different interface
-    implementations with identical fields, and it is possible to use a nested
-    map as the basis for comparison with a struct value. It also serializes the
-    entire value into a string before producing a diff, and as such is not a
-    good choice for comparing large values. By default, it compares unexported
-    fields, which makes it sensitive to changes in implementation details in
-    your dependencies. For this reason, it is not appropriate to use `pretty` on
-    protobuf messages.
+- [`pretty`] produces aesthetically pleasing difference reports. However, it
+  quite deliberately considers values that have the same visual representation
+  as equal. In particular, `pretty` does not catch differences between nil
+  slices and empty ones, is not sensitive to different interface
+  implementations with identical fields, and it is possible to use a nested
+  map as the basis for comparison with a struct value. It also serializes the
+  entire value into a string before producing a diff, and as such is not a
+  good choice for comparing large values. By default, it compares unexported
+  fields, which makes it sensitive to changes in implementation details in
+  your dependencies. For this reason, it is not appropriate to use `pretty` on
+  protobuf messages.
 
 [`pretty`]: https://pkg.go.dev/github.com/kylelemons/godebug/pretty
 
@@ -3260,18 +3260,18 @@ The conventional failure message, which is suitable for most Go tests, is
 `YourFunc(%v) = %v, want %v`. However, there are cases that may call for more or
 less detail:
 
-*   Tests performing complex interactions should describe the interactions too.
-    For example, if the same `YourFunc` is called several times, identify which
-    call failed the test. If it's important to know any extra state of the
-    system, include that in the failure output (or at least in the logs).
-*   If the data is a complex struct with significant boilerplate, it is
-    acceptable to describe only the important parts in the message, but do not
-    overly obscure the data.
-*   Setup failures do not require the same level of detail. If a test helper
-    populates a Spanner table but Spanner was down, you probably don't need to
-    include which test input you were going to store in the database.
-    `t.Fatalf("Setup: Failed to set up test database: %s", err)` is usually
-    helpful enough to resolve the issue.
+- Tests performing complex interactions should describe the interactions too.
+  For example, if the same `YourFunc` is called several times, identify which
+  call failed the test. If it's important to know any extra state of the
+  system, include that in the failure output (or at least in the logs).
+- If the data is a complex struct with significant boilerplate, it is
+  acceptable to describe only the important parts in the message, but do not
+  overly obscure the data.
+- Setup failures do not require the same level of detail. If a test helper
+  populates a Spanner table but Spanner was down, you probably don't need to
+  include which test input you were going to store in the database.
+  `t.Fatalf("Setup: Failed to set up test database: %s", err)` is usually
+  helpful enough to resolve the issue.
 
 **Tip:** Make your failure mode trigger during development. Review what the
 failure message looks like and whether a maintainer can effectively deal with
@@ -3279,11 +3279,11 @@ the failure.
 
 There are some techniques for reproducing test inputs and outputs clearly:
 
-*   When printing string data, [`%q` is often useful](#use-percent-q) to
-    emphasize that the value is important and to more easily spot bad values.
-*   When printing (small) structs, `%+v` can be more useful than `%v`.
-*   When validation of larger values fails, [printing a diff](#print-diffs) can
-    make it easier to understand the failure.
+- When printing string data, [`%q` is often useful](#use-percent-q) to
+  emphasize that the value is important and to more easily spot bad values.
+- When printing (small) structs, `%+v` can be more useful than `%v`.
+- When validation of larger values fails, [printing a diff](#print-diffs) can
+  make it easier to understand the failure.
 
 <a id="print-diffs"></a>
 
@@ -3297,9 +3297,9 @@ To compute diffs for such values, `cmp.Diff` is preferred, particularly for new
 tests and new code, but other tools may be used. See [types of equality] for
 guidance regarding the strengths and weaknesses of each function.
 
-*   [`cmp.Diff`]
+- [`cmp.Diff`]
 
-*   [`pretty.Compare`]
+- [`pretty.Compare`]
 
 You can use the [`diff`] package to compare multi-line strings or lists of
 strings. You can use this as a building block for other kinds of diffs.
@@ -3319,17 +3319,17 @@ order to use is also intentional, as there is no consensus which is
 
 -->
 
-*   Something like `diff (-want +got)` is good when you're using the `cmp`,
-    `pretty`, and `diff` packages (if you pass `(want, got)` to the function),
-    because the `-` and `+` that you add to your format string will match the
-    `-` and `+` that actually appear at the beginning of the diff lines. If you
-    pass `(got, want)` to your function, the correct key would be `(-got +want)`
-    instead.
+- Something like `diff (-want +got)` is good when you're using the `cmp`,
+  `pretty`, and `diff` packages (if you pass `(want, got)` to the function),
+  because the `-` and `+` that you add to your format string will match the
+  `-` and `+` that actually appear at the beginning of the diff lines. If you
+  pass `(got, want)` to your function, the correct key would be `(-got +want)`
+  instead.
 
-*   The `messagediff` package uses a different output format, so the message
-    `diff (want -> got)` is appropriate when you're using it (if you pass
-    `(want, got)` to the function), because the direction of the arrow will
-    match the direction of the arrow in the "modified" lines.
+- The `messagediff` package uses a different output format, so the message
+  `diff (want -> got)` is appropriate when you're using it (if you pass
+  `(want, got)` to the function), because the direction of the arrow will
+  match the direction of the arrow in the "modified" lines.
 
 The diff will span multiple lines, so you should print a newline before you
 print the diff.
@@ -3377,7 +3377,7 @@ some other error, then consider using `cmp` with [`cmpopts.EquateErrors`].
 > ```
 
 See also
-[GoTip #13: Designing Errors for Checking](https://google.github.io/styleguide/go/index.html#gotip).
+[GoTip #13: Designing Errors for Checking](https://jpg-store.github.io/styleguide/go/index.html#gotip).
 
 [tott-350]: https://testing.googleblog.com/2015/01/testing-on-toilet-change-detector-tests.html
 [`cmpopts.EquateErrors`]: https://pkg.go.dev/github.com/google/go-cmp/cmp/cmpopts#EquateErrors
@@ -3482,11 +3482,11 @@ t.Run("AM/PM confusion", ...)
 Use table-driven tests when many different test cases can be tested using
 similar testing logic.
 
-*   When testing whether the actual output of a function is equal to the
-    expected output. For example, the many [tests of `fmt.Sprintf`] or the
-    minimal snippet below.
-*   When testing whether the outputs of a function always conform to the same
-    set of invariants. For example, [tests for `net.Dial`].
+- When testing whether the actual output of a function is equal to the
+  expected output. For example, the many [tests of `fmt.Sprintf`] or the
+  minimal snippet below.
+- When testing whether the outputs of a function always conform to the same
+  set of invariants. For example, [tests for `net.Dial`].
 
 [tests of `fmt.Sprintf`]: https://cs.opensource.google/go/go/+/master:src/fmt/fmt_test.go
 [tests for `net.Dial`]: https://cs.opensource.google/go/go/+/master:src/net/dial_test.go;l=318;drc=5b606a9d2b7649532fe25794fa6b99bd24e7697c
@@ -3548,7 +3548,7 @@ that the function returns a non-nil error for an invalid input, then writing two
 separate table-driven test functions is the best approach: one for normal
 non-error outputs, and one for error outputs.
 
-[GoTip #50: Disjoint Table Tests]: https://google.github.io/styleguide/go/index.html#gotip
+[GoTip #50: Disjoint Table Tests]: https://jpg-store.github.io/styleguide/go/index.html#gotip
 
 <a id="table-tests-data-driven"></a>
 
@@ -3749,9 +3749,9 @@ Tests may be defined in the same package as the code being tested.
 
 To write a test in the same package:
 
-*   Place the tests in a `foo_test.go` file
-*   Use `package foo` for the test file
-*   Do not explicitly import the package to be tested
+- Place the tests in a `foo_test.go` file
+- Use `package foo` for the test file
+- Do not explicitly import the package to be tested
 
 ```build
 # Good:
@@ -3791,26 +3791,26 @@ package as the code being tested. In these cases, use a package name with the
 `_test` suffix. This is an exception to the "no underscores" rule to
 [package names](#package-names). For example:
 
-*   If an integration test does not have an obvious library that it belongs to
+- If an integration test does not have an obvious library that it belongs to
 
-    ```go
-    // Good:
-    package gmailintegration_test
+  ```go
+  // Good:
+  package gmailintegration_test
 
-    import "testing"
-    ```
+  import "testing"
+  ```
 
-*   If defining the tests in the same package results in circular dependencies
+- If defining the tests in the same package results in circular dependencies
 
-    ```go
-    // Good:
-    package fireworks_test
+  ```go
+  // Good:
+  package fireworks_test
 
-    import (
-      "fireworks"
-      "fireworkstestutil" // fireworkstestutil also imports fireworks
-    )
-    ```
+  import (
+    "fireworks"
+    "fireworkstestutil" // fireworkstestutil also imports fireworks
+  )
+  ```
 
 <a id="use-package-testing"></a>
 
@@ -3824,12 +3824,12 @@ allowed.
 The `testing` package provides a minimal but complete set of functionality for
 writing good tests:
 
-*   Top-level tests
-*   Benchmarks
-*   [Runnable examples](https://blog.golang.org/examples)
-*   Subtests
-*   Logging
-*   Failures and fatal failures
+- Top-level tests
+- Benchmarks
+- [Runnable examples](https://blog.golang.org/examples)
+- Subtests
+- Logging
+- Failures and fatal failures
 
 These are designed to work cohesively with core language features like
 [composite literal] and [if-with-initializer] syntax to enable test authors to
@@ -3848,15 +3848,15 @@ it enumerate all matters about which it does not offer an opinion. That said,
 here are a few things where the readability community has previously debated and
 has not achieved consensus about.
 
-*   **Local variable initialization with zero value**. `var i int` and `i := 0`
-    are equivalent. See also [initialization best practices].
-*   **Empty composite literal vs. `new` or `make`**. `&File{}` and `new(File)`
-    are equivalent. So are `map[string]bool{}` and `make(map[string]bool)`. See
-    also [composite declaration best practices].
-*   **got, want argument ordering in cmp.Diff calls**. Be locally consistent,
-    and [include a legend](#print-diffs) in your failure message.
-*   **`errors.New` vs `fmt.Errorf` on non-formatted strings**.
-    `errors.New("foo")` and `fmt.Errorf("foo")` may be used interchangeably.
+- **Local variable initialization with zero value**. `var i int` and `i := 0`
+  are equivalent. See also [initialization best practices].
+- **Empty composite literal vs. `new` or `make`**. `&File{}` and `new(File)`
+  are equivalent. So are `map[string]bool{}` and `make(map[string]bool)`. See
+  also [composite declaration best practices].
+- **got, want argument ordering in cmp.Diff calls**. Be locally consistent,
+  and [include a legend](#print-diffs) in your failure message.
+- **`errors.New` vs `fmt.Errorf` on non-formatted strings**.
+  `errors.New("foo")` and `fmt.Errorf("foo")` may be used interchangeably.
 
 If there are special circumstances where they come up again, the readability
 mentor might make an optional comment, but in general the author is free to pick
@@ -3866,8 +3866,8 @@ Naturally, if anything not covered by the style guide does need more discussion,
 authors are welcome to ask -- either in the specific review, or on internal
 message boards.
 
-[composite declaration best practices]: https://google.github.io/styleguide/go/best-practices#vardeclcomposite
-[initialization best practices]: https://google.github.io/styleguide/go/best-practices#vardeclinitialization
+[composite declaration best practices]: https://jpg-store.github.io/styleguide/go/best-practices#vardeclcomposite
+[initialization best practices]: https://jpg-store.github.io/styleguide/go/best-practices#vardeclinitialization
 
 <!--
 
